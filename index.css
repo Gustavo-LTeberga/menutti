@@ -1,0 +1,52 @@
+ body {
+      padding-top: 120px; /* espaço da navbar fixa */
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* NAV FIXA */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+    }
+
+    /* LINKS */
+    .nav-link-custom {
+      position: relative;
+      display: block;
+      padding: 8px 12px;
+      font-weight: 600;
+      color: black;
+    }
+
+    /* underline */
+    .nav-link-custom::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 2px;
+      left: 0;
+      background-color: black;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link-custom:hover::after {
+      width: 100%;
+    }
+
+    .nav-link-custom.active::after {
+      width: 100%;
+    }
+
+    /* hover UX */
+    .nav-link-custom:hover {
+      background-color: rgba(0,0,0,0.05);
+      border-radius: 6px;
+    }
