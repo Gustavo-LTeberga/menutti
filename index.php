@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Menutti</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="static/css/index.css">
 
 </head>
 
@@ -14,7 +14,7 @@
 
   <!-- Mobile First -->
 
-  <header class="container-fluid p-0">
+  <header class="container-fluid sticky-top bg-black">
 
     <!-- Título -->
     <div class="text-center fs-1 text-white p-4">
@@ -65,11 +65,59 @@
     </nav>
 
   </header>
-  <main></main>
+
+  <main class="container-fluid">
+
+    <div class="row my-card my-4">
+
+  <!-- IMAGEM -->
+  <div class="col-12 col-md-4 p-2 text-center my-auto">
+    <img class="img-fluid rounded" src="" alt="imagem">
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="col-12 col-md-8 p-3">
+
+    <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
+      Nome do Produto
+    </div>
+
+    <div class="fs-6 fs-md-4 tamanho-texto">
+      descrição
+    </div>
+
+    <!-- PREÇO + BOTÃO -->
+    <div class="row align-items-center mt-3 g-2">
+      <div class="col-12 col-md-4 fs-5 fw-semibold text-center text-md-start">
+        Preço: X
+      </div>
+
+      <div class="col-12 col-md-8">
+        <div class="botao-pedido text-center">
+          Adicionar o Pedido
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+  </main>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script src="navbar.js"></script>
+  <script src="static/js/navbar.js"></script>
 </body>
 
 </html>
