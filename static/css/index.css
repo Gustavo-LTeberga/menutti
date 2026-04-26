@@ -94,7 +94,7 @@ img {
 }
 
 /* botão */
-.botao-pedido {
+.botao {
   background-color: #99cdf0;
   color: #000;
   border-radius: 25px;
@@ -103,13 +103,16 @@ img {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
-.botao-pedido:hover {
+.botao:hover {
   background-color: #Cee4f2;
 }
 
-/**/
+/*fonte*/
 
 .great-vibes-regular {
   font-family: "Great Vibes", cursive;

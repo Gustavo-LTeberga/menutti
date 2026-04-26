@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="col-12 col-md-8">
-                        <div class="botao-pedido text-center">
+                        <div class="botao">
                             Adicionar o Pedido
                         </div>
                     </div>
