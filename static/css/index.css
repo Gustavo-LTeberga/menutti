@@ -1,5 +1,7 @@
 body {
   height: 100%; 
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
 }
 
 a {
@@ -15,6 +17,22 @@ header {
   width: 100%;
 }
 
+.color-one{
+    background-color: #Cee4f2;
+}
+.color-two{
+    background-color: #261C14;
+}
+.color-three{
+    background-color: #F2C6A0;
+}
+.color-four{
+    background-color: #734B34;
+}
+.color-five{
+    background-color: #BF8F73;
+}
+
 /*tamanho texto*/
 .tamanho-texto{
       height: 10rem;
@@ -26,7 +44,7 @@ header {
   display: block;
   padding: 8px 12px;
   font-weight: 600;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 /* underline */
@@ -37,7 +55,7 @@ header {
   height: 2px;
   bottom: 2px;
   left: 0;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   transition: width 0.3s ease;
 }
 
@@ -70,14 +88,14 @@ img {
   width: 100%;
   max-width: 1000px; 
   background-color: white;
-  border: 10px solid black;
+  border: 7px solid #261C14;
   border-radius: 1rem;
   margin: 2rem auto;
 }
 
 /* botão */
 .botao-pedido {
-  background-color: #e76f51;
+  background-color: #99cdf0;
   color: #000;
   border-radius: 25px;
   padding: 10px;
@@ -88,5 +106,13 @@ img {
 }
 
 .botao-pedido:hover {
-  background-color: #db816c;
+  background-color: #Cee4f2;
+}
+
+/**/
+
+.great-vibes-regular {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
