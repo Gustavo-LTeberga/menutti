@@ -22,7 +22,7 @@ function toggleMenu() {
           .forEach(el => el.classList.add("active"));
       });
 
-      // hover temporário
+      // hover temporário 
       link.addEventListener("mouseenter", function() {
         links.forEach(l => l.classList.remove("active"));
         this.classList.add("active");
