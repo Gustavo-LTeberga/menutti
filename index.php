@@ -13,7 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
 
-        <!-- styles -->
+    <!-- styles -->
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -38,7 +38,7 @@
 
             <!-- Logo -->
             <div class="col-6 col-md-2 fs-4 fw-bold ">
-                <img class="w-50 img-fluid" src="img/letra.png" alt="Logo" >
+                <img class="w-50 img-fluid" src="img/letra.png" alt="Logo">
             </div>
 
             <!-- Centro (menu desktop) -->
@@ -52,7 +52,7 @@
             <div class="col-6 col-md-2 d-flex justify-content-end align-items-center gap-3">
 
                 <!-- Carrinho -->
-                <a href="#" class="text-dark text-decoration-none">
+                <a href="carrinho.php" class="text-dark text-decoration-none">
                     🛒
                 </a>
 
@@ -100,11 +100,11 @@
                         Preço: X
                     </div>
 
-                    <div class="col-12 col-md-8">
-                        <div class="botao">
+                    <a href="pedido.php" class="col-12 col-md-8">
+                        <div href="pedido.php" class="botao">
                             Adicionar o Pedido
                         </div>
-                    </div>
+                    </a>
                 </div>
 
             </div>

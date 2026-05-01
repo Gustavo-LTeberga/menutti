@@ -85,29 +85,47 @@
 
             <div class="row">
 
-                <div class="col-12 my-2">
-                    <div class="botao ">
-                        Complemento
+                <div class="row my-2">
+                    <div class="col-12 fs-1 fw-bold">
+                        Adicional
                     </div>
+                     <div class="col-4 fs-5 fw-semibold text-center text-md-start">
+                        Plus
+                    </div>
+                    <div class="col-8 mt-lg-5 mt-3">
+                     <div class="contador row align-items-center text-center">
+
+                            <div class="col-4 d-flex justify-content-center">
+                                <button class="botao-redondo btn-minus">-</button>
+                            </div>
+
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <span class="fs-5 fw-bold quantidade">1</span>
+                            </div>
+
+                            <div class="col-4 d-flex justify-content-center">
+                                <button class="botao-redondo btn-plus">+</button>
+                            </div>
+
+                        </div>
+
                 </div>
 
-            </div>
+                <div class="row my-4">
 
-            <div class="row my-4">
+                    <div class="col-12 fs-1 fw-bold ps-5">
+                        Observação
+                    </div>
 
-                <div class="col-12 fs-1 fw-bold ps-5">
-                    Observação
+                    <div class="col-12 d-flex justify-content-center">
+                        <textarea placeholder="Ex: sem cebola, molho à parte..."></textarea>
+                    </div>
+
+                    <div class="botao mt-4">
+                        Adicionar No Carrinho
+                    </div>
+
                 </div>
-
-                <div class="col-12 d-flex justify-content-center">
-                    <textarea placeholder="Ex: sem cebola, molho à parte..."></textarea>
-                </div>
-
-                <div class="botao mt-4">
-                    Adicionar No Carrinho
-                </div>
-
-            </div>
 
 
 

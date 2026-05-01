@@ -2,7 +2,7 @@
 
 require_once('Banco.php');
 
-class Usuario{
+class Funcionario{
     // Atributos (id, nome_completo, email, senha e id_cargo):
     public $id;
     public $nome_completo;
@@ -28,6 +28,50 @@ class Usuario{
         $funcionario = $comando->fetchAll(PDO::FETCH_ASSOC);
         Banco::desconectar();
         return $funcionario;
+    }
+
+    public function listar(){
+        $sql = "SELECT * FROM funcionarios WHERE id = ?";
+        $banco = Banco::conectar();
+        $comando = $banco->prepare($sql);
+        $comando->execute([$this->id_cargo]);
+        $arr_resultado = $comando->fetchAll(PDO::FETCH_ASSOC);
+        Banco::desconectar();
+        return $arr_resultado;
+    }
+
+    public function listarPorId(){
+        $sql = "SELECT * FROM funcionarios WHERE id = ?";
+        $banco = Banco::conectar();
+        $comando = $banco->prepare($sql);
+        $comando->execute([$this->id]);
+        $arr_resultado = $comando->fetchAll(PDO::FETCH_ASSOC);
+        Banco::desconectar();
+        return $arr_resultado;
+    }
+
+    // Método para atualizar um contato existente'
+    public function editar(){
+        $sql = "UPDATE contatos SET nome_completo = ?, endereco = ?, cidade = ?, telefone = ?, email = ? WHERE id = ?";
+        $banco = Banco::conectar();
+        $comando = $banco->prepare($sql);
+        $comando->execute([
+            $this->nome_completo,
+            $this->email,
+            $this->id_cargo,
+            $this->id
+        ]);
+        Banco::desconectar();
+        return $comando->rowCount();
+    }
+
+    public function apagar(){
+        $sql = "DELETE FROM funcionarios WHERE id = ?";
+        $banco = Banco::conectar();
+        $comando = $banco->prepare($sql);
+        $comando->execute([$this->id]);
+        Banco::desconectar();
+        return $comando->rowCount();
     }
 }
 
