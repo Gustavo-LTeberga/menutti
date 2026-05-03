@@ -45,7 +45,7 @@
 
     </header>
 
-    <main class="mt-3 container color-five rounded ">
+    <main class="my-3 container color-five rounded ">
 
         <div class="row my-4 mx-auto">
 
@@ -101,7 +101,7 @@
 
                 <div class="my-card2">
 
-                    <div class=" row d-flex align-items-center my-2">
+                    <div class=" row d-flex align-items-center my-4">
 
                         <div class="col-4 fs-5 fw-semibold ps-4">
                             Complemento
