@@ -21,24 +21,33 @@
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/pedido.css">
 
+    <!-- icones -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
 </head>
 
-<body class="container-fluid p-0 color-four inter-uniquifier">
+<body class="container-fluid p-0 color-four inter-uniquifier ">
 
     <!-- Mobile First -->
 
-    <header class="container-fluid sticky-top color-two">
+    <header class="container-fluid sticky-top color-two d-flex align-items-center">
 
         <!-- Título -->
-        <div class="text-center fs-1 text-white p-4 great-vibes-regular">
+
+        <div class="col-md-5 fs-1 ">
+            <a class="ps-3 text-white" href="index.php"><i class="bi bi-arrow-left"></i></a>
+        </div>
+        <div class="ps-lg-5 col-md-7 fs-1 text-white p-4 great-vibes-regular">
             Menutti
         </div>
 
+
     </header>
 
-    <main class="mt-3 container color-five rounded">
+    <main class="mt-3 container color-five rounded ">
 
-        <div class="row my-4">
+        <div class="row my-4 mx-auto">
 
             <!-- IMAGEM -->
             <div class="col-12 col-md-6 p-2 text-center my-auto">
@@ -83,49 +92,64 @@
 
             </div>
 
-            <div class="row">
 
-                <div class="row my-2">
-                    <div class="col-12 fs-1 fw-bold">
-                        Adicional
-                    </div>
-                     <div class="col-4 fs-5 fw-semibold text-center text-md-start">
-                        Plus
-                    </div>
-                    <div class="col-8 mt-lg-5 mt-3">
-                     <div class="contador row align-items-center text-center">
+            <div class="row my-2 mx-auto">
 
-                            <div class="col-4 d-flex justify-content-center">
-                                <button class="botao-redondo btn-minus">-</button>
-                            </div>
+                <div class="col-12 fs-1 ms-md-5 fw-bold">
+                    Adicional
+                </div>
 
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <span class="fs-5 fw-bold quantidade">1</span>
-                            </div>
+                <div class="my-card2">
 
-                            <div class="col-4 d-flex justify-content-center">
-                                <button class="botao-redondo btn-plus">+</button>
-                            </div>
+                    <div class=" row d-flex align-items-center my-2">
 
+                        <div class="col-4 fs-5 fw-semibold ps-4">
+                            Complemento
                         </div>
 
+                        <div class="col-8 ">
+                            <div class="contador row align-items-center text-center ps-5" data-max="10">
+
+                                <div class="col-4 d-flex justify-content-center">
+                                    <button class="botao-redondo btn-minus">-</button>
+                                </div>
+
+                                <div class="col-4 d-flex justify-content-center align-items-center">
+                                    <span class="fs-5 fw-bold quantidade">0</span>
+                                </div>
+
+                                <div class="col-4 d-flex justify-content-center">
+                                    <button class="botao-redondo btn-plus">+</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="row my-4">
+            </div>
 
-                    <div class="col-12 fs-1 fw-bold ps-5">
-                        Observação
-                    </div>
+            <div class="row my-4 mx-auto">
 
-                    <div class="col-12 d-flex justify-content-center">
-                        <textarea placeholder="Ex: sem cebola, molho à parte..."></textarea>
-                    </div>
-
-                    <div class="botao mt-4">
-                        Adicionar No Carrinho
-                    </div>
-
+                <div class="col-12 fs-1 fw-bold ps-5">
+                    Observação
                 </div>
+
+                <div class="col-12 d-flex justify-content-center">
+                    <textarea placeholder="Ex: sem cebola, molho à parte..."></textarea>
+                </div>
+
+                <a href="index.php" class="botao mt-4">
+                    Adicionar No Carrinho
+                </a>
+
+            </div>
+
+
+
+        </div>
 
 
 

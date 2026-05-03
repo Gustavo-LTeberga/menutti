@@ -59,3 +59,12 @@ textarea {
 textarea:focus {
     border-color: #Cee4f2;
 }
+
+.my-card2 {
+  width: 90%; 
+  background-color: white;
+  border: 2px solid #261C14;
+  border-radius: 1rem;
+  margin: 2rem auto;
+
+}

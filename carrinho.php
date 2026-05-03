@@ -21,18 +21,27 @@
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/carrinho.css">
 
+      <!-- icones -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
 </head>
 
 <body class="container-fluid p-0 color-four inter-uniquifier">
 
     <!-- Mobile First -->
 
-    <header class="container-fluid sticky-top color-two">
+    <header class="container-fluid sticky-top color-two d-flex align-items-center">
 
         <!-- Título -->
-        <div class="text-center fs-1 text-white p-4 great-vibes-regular">
+
+        <div class="col-md-5 fs-1 ">
+            <a class="ps-3 text-white" href="index.php"><i class="bi bi-arrow-left"></i></a>
+        </div>
+        <div class="ps-lg-5 col-md-7 fs-1 text-white p-4 great-vibes-regular">
             Menutti
         </div>
+
 
     </header>
 

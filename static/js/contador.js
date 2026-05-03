@@ -1,69 +1,80 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // pega todos os contadores da página (cada produto)
+    // percorre todos os contadores da página
     document.querySelectorAll(".contador").forEach(contador => {
 
-        // valor atual do contador
-        let valor = 1;
-
-        // trava pra evitar clique duplo (mobile / spam)
-        let bloqueado = false;
-
-        // pegando elementos dentro desse contador específico
+        // elementos internos de cada contador
         const btnMinus = contador.querySelector(".btn-minus");
         const btnPlus = contador.querySelector(".btn-plus");
         const quantidade = contador.querySelector(".quantidade");
 
-        // atualiza o que aparece na tela
+        // pega o valor inicial do HTML (ex: <span>2</span>)
+        let valor = parseInt(quantidade.textContent) || 0;
+
+        // pega o limite máximo definido no HTML (data-max="3")
+        const max = parseInt(contador.dataset.max) || Infinity;
+
+        // trava para evitar múltiplos cliques rápidos
+        let bloqueado = false;
+
+        // atualiza o número na tela e estado dos botões
         function render() {
+
+            // mostra o valor atual
             quantidade.textContent = valor;
 
-            // se for 0, mostra lixeira, senão mostra "-"
-            btnMinus.textContent = valor === 0 ? "🗑️" : "-";
+            // desativa botão "+" se chegou no limite
+            btnPlus.disabled = valor >= max;
+
+            // desativa botão "-" se estiver em 0
+            btnMinus.disabled = valor <= 0;
         }
 
-        // função intermediária pra evitar execução dupla
+        // função que controla execução (anti-spam de clique)
         function executar(acao) {
 
-            // se estiver bloqueado, ignora clique
+            // impede execução se estiver bloqueado
             if (bloqueado) return;
 
             bloqueado = true;
 
-            // executa a ação recebida (incrementar ou decrementar)
+            // executa a ação (incrementar ou decrementar)
             acao();
 
-            // atualiza a interface
+            // atualiza interface
             render();
 
-            // libera depois de 200ms
+            // libera novamente depois de 200ms
             setTimeout(() => {
                 bloqueado = false;
             }, 200);
         }
 
-        // botão +
+        // clique no "+"
         btnPlus.addEventListener("click", () => {
             executar(() => {
-                valor++;
-            });
-        });
 
-        // botão -
-        btnMinus.addEventListener("click", () => {
-            executar(() => {
-
-                if (valor > 0) {
-                    valor--;
-                } else {
-                    // aqui depois você remove do carrinho
-                    console.log("remover item futuramente");
+                // só aumenta se não tiver no limite
+                if (valor < max) {
+                    valor++;
                 }
 
             });
         });
 
-        // inicializa o contador na tela
+        // clique no "-"
+        btnMinus.addEventListener("click", () => {
+            executar(() => {
+
+                // só diminui se for maior que 0
+                if (valor > 0) {
+                    valor--;
+                }
+
+            });
+        });
+
+        // inicializa o estado correto ao carregar
         render();
     });
 
