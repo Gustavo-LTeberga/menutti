@@ -29,7 +29,7 @@
 
 <body class="color-one inter-uniquifier">
 
-    <main class="container color-three py-5">
+    <main class="container bg-white py-5">
 
         <header class="text-center mb-5">
             <h1 class="fw-bold">Qual seu cargo?</h1>
