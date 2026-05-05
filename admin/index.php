@@ -19,7 +19,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/admin-index.css">
-    <link rel="stylesheet" href="../static/css/index.css">
 
     <!-- icones -->
 
@@ -27,58 +26,108 @@
 
 </head>
 
-<body class="color-one inter-uniquifier">
+<body class="color-four">
 
-    <main class="container bg-white py-5">
+    <main>
 
-        <header class="text-center mb-5">
-            <h1 class="fw-bold">Qual seu cargo?</h1>
-        </header>
+        <!-- selecionar cargo -->
 
-        <form action="" method="POST">
-            <div class="row justify-content-center">
+        <section id="tela-cargo">
 
-                <!-- CARD -->
-                <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
-                    <button type="submit" name="user_id" value="1" class="user-card">
-                        <img src="../img/person-fill.svg" class="user-img">
-                        <span class="fs-3 fw-semibold">Admin</span>
-                    </button>
-                </div>
+            <div class="main-cargo container color-five py-5">
 
-                <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
-                    <button type="submit" name="user_id" value="2" class="user-card">
-                        <img src="../img/person-fill.svg" class="user-img">
-                        <span class="fs-3 fw-semibold">Chefe</span>
-                    </button>
-                </div>
+                <header class="text-center mb-5">
+                    <h1 class="fw-bold">Qual seu cargo?</h1>
+                </header>
 
-                <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
-                    <button type="submit" name="user_id" value="3" class="user-card">
-                        <img src="../img/person-fill.svg" class="user-img">
-                        <span class="fs-3 fw-semibold">Garçom</span>
-                    </button>
-                </div>
+                <form action="" method="POST">
+                    <div class="row justify-content-center ">
 
-                <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
-                    <button type="submit" name="user_id" value="4" class="user-card">
-                        <img src="../img/person-fill.svg" class="user-img">
-                        <span class="fs-3 fw-semibold">Caixa</span>
-                    </button>
-                </div>
+                        <!-- CARD -->
+                        <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center ">
+                            <button type="button" onclick="abrirLogin('Admin')" class="user-card color-one">
+                                <img src="../img/person-fill.svg" class="user-img">
+                                <span class="fs-3 fw-semibold">Admin</span>
+                            </button>
+                        </div>
+
+                        <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
+                            <button type="button" onclick="abrirLogin('Chefe')" class="user-card">
+                                <img src="../img/person-fill.svg" class="user-img">
+                                <span class="fs-3 fw-semibold">Chefe</span>
+                            </button>
+                        </div>
+
+                        <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
+                            <button type="button" onclick="abrirLogin('Garçom')" class="user-card">
+                                <img src="../img/person-fill.svg" class="user-img">
+                                <span class="fs-3 fw-semibold">Garçom</span>
+                            </button>
+                        </div>
+
+                        <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center">
+                            <button type="button" onclick="abrirLogin('Caixa')" class="user-card">
+                                <img src="../img/person-fill.svg" class="user-img">
+                                <span class="fs-3 fw-semibold">Caixa</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
 
             </div>
-        </form>
+
+        </section>
+
+        <!-- Login -->
+
+        <section id="tela-login" class="d-flex justify-content-center align-items-center vh-100 hidden">
+
+            <div class="container login-card mx-auto color-five">
+                <form class="h-100  row">
+                    <!-- topo do card -->
+                    <div class="col-12 col-md-6">
+
+                        <a href="#" onclick="voltarIndex()" class="text-black fs-1 ps-2">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                        <div class="pb-md-4 h-75 d-flex flex-column justify-content-center align-items-center">
+                            <span id="cargo-nome" class="fw-bold fs-2">Admin</span>
+                            <img src="../img/person-fill.svg" class="img-fluid login-img" alt="login">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center gap-4 my-md-3">
+                        <!-- conteúdo -->
+                        <input type="text" class="w-75 form-control" placeholder="Email">
+                        <input type="password" class="w-75 form-control" placeholder="Senha">
+                        <button class="login-botao mb-3 mb-md-0">Entrar</button>
+                    </div>
+                </form>
+            </div>
+
+        </section>
 
     </main>
-
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="static/js/contador.js"></script>
+    <script>
+        function abrirLogin(cargo) {
+            document.getElementById("tela-cargo").classList.add("hidden");
+            document.getElementById("tela-login").classList.remove("hidden");
+
+            document.getElementById("cargo-nome").innerText = cargo;
+        }
+
+        function voltarIndex() {
+            document.getElementById("tela-login").classList.add("hidden");
+            document.getElementById("tela-cargo").classList.remove("hidden");
+        }
+    </script>
 </body>
 
 </html>

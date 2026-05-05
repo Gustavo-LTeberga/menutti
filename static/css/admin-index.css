@@ -1,4 +1,32 @@
-main{
+body {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+}
+
+.color-one{
+    background-color: #Cee4f2;
+}
+.color-two{
+    background-color: #261C14;
+}
+.color-three{
+    background-color: #F2C6A0;
+}
+.color-four{
+    background-color: #734B34;
+}
+.color-five{
+    background-color: #BF8F73;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/*selecionar cargo*/
+
+.main-cargo {
 
     min-height: 60rem;
     width: 80%;
@@ -16,7 +44,7 @@ main{
     border: 7px solid #261C14;
     border-radius: 16px;
 
-    background-color: #fff;
+    background-color: #Cee4f2;
 
     display: flex;
     flex-direction: column;
@@ -44,3 +72,36 @@ main{
     height: 120px;
 }
 
+/*Login*/
+
+.login-card {
+    border: 7px solid #261C14;
+    border-radius: 16px;
+    width: 70%;
+    height: 400px;
+
+}
+
+.login-img {
+    width: 120px;
+    height: 120px;
+}
+
+.login-botao {
+    background: #261C14;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    width: 75%;
+    height: 40px;
+
+    transition: all 0.25s ease-in-out;
+}
+
+.login-botao:hover {
+    transform: scale(1.05);
+}
+
+.login-botao:active {
+    transform: scale(0.97);
+}
