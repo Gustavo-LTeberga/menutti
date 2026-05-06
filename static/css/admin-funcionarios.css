@@ -1,0 +1,79 @@
+/*botão adicionar*/
+
+.botao-adicionar {
+
+    width: 25%;
+    background-color: #99cdf0;
+    border: 2px solid black;
+    border-radius: 20px;
+
+}
+
+.botao-adicionar:hover {
+
+    background-color: #Cee4f2;
+
+}
+
+/*card*/
+
+.card-funcionarios {
+
+    width: 75%;
+    background-color: white;
+    border: 7px solid black;
+    border-radius: 20px;
+    min-height: 200px;
+
+}
+
+.card-cadastrar {
+
+    width: 85%;
+    background-color: white;
+    border: 7px solid black;
+    border-radius: 20px;
+    min-height: 200px;
+
+}
+
+@media (min-width: 850px) {
+  .card-cadastrar {
+    width: 50%;
+  }
+
+  
+}
+
+/*botão de editar e excluir*/
+
+.botao-edits {
+    width: 90%;
+    border: 2px solid black;
+    border-radius: 20px;
+
+    transition: all 0.25s ease-in-out;
+}
+
+.botao-edits:hover {
+    transform: scale(1.05);
+}
+
+.botao-edits:active {
+    transform: scale(0.97);
+}
+
+/*img*/
+img {
+    transition: all 0.25s ease-in-out;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/*modal*/
+
+.hidden {
+    display: none !important;
+}

@@ -1,223 +1,260 @@
-<?php
-
-// Verificar se o usuário está logado:
-session_start();
-if (!isset($_SESSION['funcionario'])) {
-    // Retornar ao login:
-    header("Location: index.php");
-    exit;
-}
-
-
-// Importar a classe Contato:
-require_once('model/Funcionario.php');
-
-// Instanciar um obj do tipo Contato:
-$f = new Funcionario();
-
-$f->id_cargo = $_SESSION['funcionario']['id'];
-
-// Executar o SELECT e obter os dados da tabela:
-$tabela_funcionarios = $f->listar();
-
-//print_r($tabela_contatos);
-
-
-
-?>
-
-
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funcionários Cadastrados</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="https://i.imgur.com/W1VlRma.png">
-    <style>
-        /* CSS show do estevinho */
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px 0;
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menutti</title>
 
-        .container {
-            max-width: 1000px;
-        }
+    <!-- fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
+    <!-- styles -->
 
-        .card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            border: none;
-        }
 
-        .card-header h1 {
-            margin: 0;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/admin-index.css">
+    <link rel="stylesheet" href="../static/css/admin-funcionarios.css">
 
-        .form-control,
-        .btn {
-            border-radius: 8px;
-        }
+    <!-- icones -->
 
-        .btn-primary {
-            background: #667eea;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            font-weight: 500;
-        }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-        .btn-primary:hover {
-            background: #5a6fd8;
-        }
-
-        .table {
-            margin-top: 20px;
-            background: white;
-        }
-
-        .table thead {
-            background-color: #f8f9fa;
-        }
-
-        .table th {
-            font-weight: 600;
-            color: #495057;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-
-        .table tbody tr:hover {
-            background-color: #f1f3f5;
-        }
-
-        .empty-message {
-            text-align: center;
-            color: #6c757d;
-            font-style: italic;
-            padding: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .card-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .btn {
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 
-<body>
+<body class="container-fluid p-0 color-three inter-uniquifier">
 
-    <div class="container">
-        <div class="row">
-            <div class="col d-flex justify-content-end mb-2">
-                <a href="actions/usuario_sair.php" class="btn btn-danger">Sair</a>
-            </div>
+    <!-- Mobile First -->
+
+
+
+    <!-- Voltar -->
+
+    <header id="cabecalho" class="container-fluid sticky-top color-two d-flex align-items-center justify-content-between p-4">
+
+        <!-- Título -->
+
+        <div class=" fs-1 ">
+            <a class="ps-5 text-white" href="index.php"><i class="bi bi-arrow-left"></i></a>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="card">
-            <!-- Cabeçalho -->
-            <div class="card-header">
-                <h1>Agenda de Funcionário de <?= $_SESSION['funcionario']['nome_completo'] ?></h1>
+
+        <!-- Adicionar -->
+
+        <button onclick="abrirCadastrar()" class="me-3  fs-1 text-white p-2 d-flex justify-content-center botao-adicionar ">
+            <i class="bi bi-plus-lg"></i>
+        </button>
+
+
+    </header>
+
+
+
+    <section id="listagem" class="container-fluid d-flex flex-column align-items-center justify-content-center ">
+
+        <div class="row card-funcionarios my-4">
+
+            <!-- IMAGEM -->
+            <div class="col-12 col-md-4 p-2 text-center my-auto">
+                <img class="img-fluid rounded w-50 h-50" src="../img/person-fill.svg" alt="imagem">
             </div>
 
-            <div class="card-body p-4">
-                <!-- Formulário de Cadastro -->
-                <form id="formContato" action="actions/funcionario_cadastrar.php" method="post">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="nome_completo" class="form-label">Nome Completo</label>
-                            <input name="nome_completo" type="text" class="form-control" id="nome_completo" placeholder="Ex: João Silva" required>
-                            <div class="invalid-feedback">Por favor, insira o nome completo.</div>
-                        </div>
+            <!-- CONTEÚDO -->
+            <div class="col-12 col-md-5 p-3 d-flex flex-column justify-content-center ">
 
-                        <div class="col-12">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="joao@exemplo.com">
-                            <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
-                        </div>
-                        
-                        <div class="col-12">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input name="email" type="email" class="form-control" id="email" placeholder="joao@exemplo.com">
-                            <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
-                        </div>
-                        <div class="col-12 text-end mt-3">
-                            <button type="submit" class="btn btn-primary">
-                                Cadastrar Funcionário
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <hr class="my-4">
-
-                <!-- Tabela de Funcionario -->
-                <h5 class="mb-3 text-muted">Funcionários Cadastrados</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle" id="tabelaFuncionarios">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Senha</th>
-                                <th>Cargo</th>
-                            </tr>
-                        </thead>
-                        <tbody id="corpoTabela">
-                            <!-- Funcionários serão listados aqui via PHP -->
-                            <?php if (count($tabela_funcionarios) == 0) { ?>
-                                <tr id="linhaVazia">
-                                    <td colspan="6" class="empty-message">
-                                        Nenhum funcionário cadastrado ainda.
-                                    </td>
-                                </tr>
-                            <?php } else { ?>
-                                <?php foreach ($tabela_funcionarios as $tf) { ?>
-                                    <tr>
-                                        <td><?= $tf['nome_completo']; ?></td>
-                                        <td><?= $tf['email']; ?></td>
-                                        <td><?= $tf['senha']; ?></td>
-                                        <td><?= $tf['id_cargo']; ?></td>
-
-                                        <td>
-                                            <a href="actions/funcionario_exculuir.php?id=<?= $tf['id']; ?>">Remover</a>
-                                            | <a href="editar_funcionario.php?id=<?= $tf['id']; ?>">Editar</a>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                <div class="fs-4 fw-bold">
+                    Nome Completo
                 </div>
+                <div class="fs-6 fw-semibold">
+                    admin
+                </div>
+                <div class="fs-4 fw-bold">
+                    Email
+                </div>
+                <div class="fs-6 fw-semibold">
+                    admin@gmail.com
+                </div>
+                <div class="fs-4 fw-bold">
+                    Cargo
+                </div>
+                <div class="fs-6 fw-semibold">
+                    admin
+                </div>
+
             </div>
+
+            <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
+
+                <button onclick="abrirEditar()" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
+                    <i class="bi bi-pen-fill"></i>
+                </button>
+                <button class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
+                    <i class="bi bi-trash3-fill"></i>
+                </button>
+
+            </div>
+
         </div>
-    </div>
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <?php include_once('includes/alertas_include.php'); ?>
+
+    </section>
+
+    <section id="cadastrar" class="d-flex justify-content-center my-3 hidden">
+
+        <div class="card-cadastrar py-4">
+
+            <!-- Cabeçalho -->
+            <div class="py-4">
+                <div class="fs-1 fw-bold text-center">Cadastrar Funcionário</div>
+            </div>
+
+            <!-- Formulário -->
+            <form method="POST" action="" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+
+                <!-- Nome -->
+                <div class="">
+                    <label class="fs-4 " for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome_completo" required class=" form-control fw-semibold">
+                </div>
+
+
+
+                <!-- Email -->
+                <div class="">
+                    <label class="fs-4 " for="email">Email</label>
+                    <input type="email" id="email" name="email" required class=" form-control fw-semibold">
+                </div>
+
+
+
+                <!-- Senha -->
+                <div class="">
+                    <label class="fs-4 " for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required class=" form-control fw-semibold">
+                </div>
+
+
+                <!-- Cargo -->
+                <div class="">
+                    <label class="fs-4 " for="cargo">Cargo</label>
+                    <select id="cargo" name="id_cargo" required class=" form-control fw-semibold">
+
+                        <option value="1">Admin</option>
+                        <option value="2">Chefe</option>
+                        <option value="3">Caixa</option>
+                        <option value="4">Gaçom</option>
+
+                    </select>
+                </div>
+
+
+                <!-- Botões -->
+                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
+                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Cadastrar</button>
+                    <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <section id="editar" class="d-flex justify-content-center my-3 hidden">
+
+        <div class="card-cadastrar py-4">
+
+            <!-- Cabeçalho -->
+            <div class="py-4">
+                <div class="fs-1 fw-bold text-center">Editar Funcionário</div>
+            </div>
+
+            <!-- Formulário -->
+            <form method="POST" action="" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+
+                <!-- Nome -->
+                <div class="">
+                    <label class="fs-4 " for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome_completo" value="nome" required class=" form-control fw-semibold">
+                </div>
+
+
+
+                <!-- Email -->
+                <div class="">
+                    <label class="fs-4 " for="email">Email</label>
+                    <input type="email" id="email" name="email" value="admin@gmail.com" required class=" form-control fw-semibold">
+                </div>
+
+
+
+                <!-- Senha -->
+                <div class="">
+                    <label class="fs-4 " for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required class=" form-control fw-semibold">
+                </div>
+
+
+                <!-- Cargo -->
+                <div class="">
+                    <label class="fs-4 " for="cargo">Cargo</label>
+                    <select id="cargo" name="id_cargo" required class=" form-control fw-semibold">
+
+                        <option value="1">Admin</option>
+                        <option value="2">Chefe</option>
+                        <option value="3">Caixa</option>
+                        <option value="4">Gaçom</option>
+
+                    </select>
+                </div>
+
+
+                <!-- Botões -->
+                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
+                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Salvar Alteração</button>
+                    <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function abrirCadastrar() {
+
+            document.getElementById("cabecalho").classList.add("hidden");
+            document.getElementById("listagem").classList.add("hidden");
+            document.getElementById("cadastrar").classList.remove("hidden");
+
+        }
+
+         function abrirEditar() {
+
+            document.getElementById("cabecalho").classList.add("hidden");
+            document.getElementById("listagem").classList.add("hidden");
+            document.getElementById("editar").classList.remove("hidden");
+
+        }
+
+        function voltar() {
+            document.getElementById("cabecalho").classList.remove("hidden");
+            document.getElementById("listagem").classList.remove("hidden");
+            document.getElementById("cadastrar").classList.add("hidden");
+            document.getElementById("editar").classList.add("hidden");
+        }
+
+    </script>
 </body>
 
 </html>

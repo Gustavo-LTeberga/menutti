@@ -41,7 +41,7 @@
                 </header>
 
                 <form action="" method="POST">
-                    <div class="row justify-content-center ">
+                    <div class="row ">
 
                         <!-- CARD -->
                         <div class="col-12 col-sm-6 mb-4 d-flex justify-content-center ">

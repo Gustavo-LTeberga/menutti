@@ -56,8 +56,8 @@
             <div class="col-6 col-md-2 d-flex justify-content-end align-items-center gap-3">
 
                 <!-- Carrinho -->
-                <a href="carrinho.php" class="text-dark text-decoration-none">
-                    🛒
+                <a href="carrinho.php" class="text-white text-decoration-none fs-5 pe-3">
+                    <i class="bi bi-cart-fill"></i>
                 </a>
 
                 <!-- Botão mobile -->
