@@ -40,7 +40,7 @@
         <!-- Título -->
 
         <div class=" fs-1 ">
-            <a class="ps-5 text-white" href="index.php"><i class="bi bi-arrow-left"></i></a>
+            <a class="ps-2 ps-md-5 text-white" href="admin.php"><i class="bi bi-arrow-left"></i></a>
         </div>
 
 
