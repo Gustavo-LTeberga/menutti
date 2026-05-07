@@ -5,20 +5,21 @@
         // Importar o arquivo da classe:
         require_once('../model/Funcionario.php');
         // Instanciar um obj do tipo "Usuario":
-        $u = new Funcionario();
+        $f = new Funcionario();
         // Obter os dados vindos do POST:
-        $u->nome_completo = strip_tags($_POST['nome_completo']);
-        $u->email = strip_tags($_POST['email']);
-        $u->senha = strip_tags($_POST['senha']);
+        $f->nome_completo = strip_tags($_POST['nome_completo']);
+        $f->email = strip_tags($_POST['email']);
+        $f->senha = strip_tags($_POST['senha']);
+        $f->id_cargo = strip_tags($_POST['id_cargo']);
 
         // Verificar se os campos foram preenchidos:
-        if(empty($u->nome_completo) || empty($u->email) || empty($u->senha) || !filter_var($u->email, FILTER_VALIDATE_EMAIL)){
+        if(empty($f->nome_completo) || empty($f->email) || empty($f->senha) || !filter_var($f->email, FILTER_VALIDATE_EMAIL)){
             echo "Os campos nome completo, e-mail e senha são obrigatórios, e o e-mail deve ser válido.";
             exit;
         }
 
         // Executar o INSERT:
-        $resultado = $u->cadastrar();
+        $resultado = $f->cadastrar();
 
         // Se der certo, voltar o usuário para a listagem de contato:
         if($resultado == 1){
@@ -28,7 +29,7 @@
                 "tipo" => "sucesso",
                 "mensagem" => "Funcionário cadastrado com sucesso!"
             ];
-            header('Location: ../index.php');
+            header('Location: ../admin/index.php');
             exit();
         }else{
             // Criar uma sessão temporária para mostrar a mensagem de erro:
@@ -37,7 +38,7 @@
                 "tipo" => "erro",
                 "mensagem" => "Falha ao cadastrar funcionário."
             ];
-            header('Location: ../index.php');
+            header('Location: ../admin/index.php');
             exit();
         }
 

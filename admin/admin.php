@@ -29,7 +29,17 @@
 
 <body class="color-four">
 
-    <main class="d-flex justify-content-center align-items-center vh-100">
+    <header id="cabecalho" class="container-fluid sticky-top color-two d-flex align-items-center p-5">
+
+        <!-- Título -->
+
+        <div class=" fs-1 ">
+            <a class="ps-2 ps-md-5 text-white" href="admin.php"><i class="bi bi-arrow-left"></i></a>
+        </div>
+
+    </header>
+
+    <main class="d-flex justify-content-center  m-5">
 
         <div class="main-admin container color-five py-5 d-flex justify-content-center align-items-center">
 
@@ -61,6 +71,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <?php include_once('../includes/alertas_includes.php'); ?>
 </body>
 
 </html>

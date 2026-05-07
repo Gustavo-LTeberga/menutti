@@ -4,7 +4,7 @@
 session_start();
 if (!isset($_SESSION['funcionario'])) {
     // Retornar ao login:
-    header("Location: ../index.php");
+    header("Location: ../admin/index.php");
     exit;
 }
 
@@ -24,16 +24,16 @@ if (isset($_GET['id'])) {
         // Show! Redirecionar de volta à agenda:
         $_SESSION['alerta'] = [
             "tipo" => "sucesso",
-            "mensagem" => "O contato selecionado foi removido!"
+            "mensagem" => "O funcionário selecionado foi removido!"
         ];
-        header('Location: ../.php');
+        header('Location: ../admin/funcionarios.php');
         exit();
     } else {
          $_SESSION['alerta'] = [
             "tipo" => "erro",
             "mensagem" => "Falha ao apagar contato."
         ];
-        header('Location: ../contatos.php');
+        header('Location: ../admin/funcionarios.php');
         exit();
     }
 } else {

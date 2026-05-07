@@ -2,7 +2,7 @@
 
 require_once('Banco.php');
 
-class Produto{
+class Pedido{
     // Atributos (id, id_mesa, id_produto, quantidade, finalizado, observacao, data, id_funcionario):
     public $id;
     public $id_mesa;
@@ -54,7 +54,7 @@ class Produto{
         $pdo = Banco::conectar();
         $sql = "UPDATE pedido SET id_mesa = ?, id_produto = ?, qualidade = ?, finalizado = ?, observacao = ?, data = ?, id_funcionario = ? WHERE id = ?";
         $comando = $pdo->prepare($sql);
-        $comando->execute([$this->$this->nome_ingt, $this->adicional, $this->id_adicional, $this->id]);
+        $comando->execute([$this->$this->nome_ingt, $this->quantidade, $this->observacao, $this->id]);
         Banco::desconectar();
         return $comando->rowCount();
     }

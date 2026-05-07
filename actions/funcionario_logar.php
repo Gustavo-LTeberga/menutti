@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 "tipo" => "erro",
                 "mensagem" => "Usuário ou senha inválidos."
             ];
-            header('Location: ../index.php');
+            header('Location: ../admin/index.php');
             exit();
         }
     

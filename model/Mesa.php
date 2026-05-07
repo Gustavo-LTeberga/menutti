@@ -2,7 +2,7 @@
 
 require_once('Banco.php');
 
-class Produto{
+class Mesa{
     // Atributos (id, numero):
     public $id;
     public $numero;

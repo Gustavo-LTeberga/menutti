@@ -15,7 +15,7 @@ class Funcionario{
         $pdo = Banco::conectar();
         $sql = "INSERT INTO funcionarios (nome_completo, email, senha, id_cargo) VALUES (?, ?, ?, ?)";
         $comando = $pdo->prepare($sql);
-        $comando->execute([$this->nome_completo, $this->email, hash('sha256', $this->senha)]);
+        $comando->execute([$this->nome_completo, $this->email, hash('sha256', $this->senha), $this->id_cargo]);
         Banco::desconectar();
         return $comando->rowCount();
     }
@@ -31,13 +31,13 @@ class Funcionario{
     }
 
     public function listar(){
-        $sql = "SELECT * FROM funcionarios WHERE id = ?";
-        $banco = Banco::conectar();
-        $comando = $banco->prepare($sql);
-        $comando->execute([$this->id_cargo]);
-        $arr_resultado = $comando->fetchAll(PDO::FETCH_ASSOC);
+        $pdo = Banco::conectar();
+        $sql = "SELECT * FROM funcionarios";
+        $comando = $pdo->prepare($sql);
+        $comando->execute();
+        $produtos = $comando->fetchAll(PDO::FETCH_ASSOC);
         Banco::desconectar();
-        return $arr_resultado;
+        return $produtos;
     }
 
     public function listarPorId(){
@@ -52,7 +52,7 @@ class Funcionario{
 
     // Método para atualizar um contato existente'
     public function editar(){
-        $sql = "UPDATE contatos SET nome_completo = ?, endereco = ?, cidade = ?, telefone = ?, email = ? WHERE id = ?";
+        $sql = "UPDATE funcionarios SET nome_completo = ?, email = ?, id_cargo = ? WHERE id = ?";
         $banco = Banco::conectar();
         $comando = $banco->prepare($sql);
         $comando->execute([

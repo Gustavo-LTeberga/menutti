@@ -385,6 +385,8 @@
 
         
     </script>
+
+    <?php include_once('../includes/alertas_includes.php'); ?>
 </body>
 
 </html>

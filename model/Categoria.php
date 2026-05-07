@@ -19,12 +19,21 @@ class Categoria{
  
     public function listar(){
         $pdo = Banco::conectar();
-        $sql = "SELECT * FROM categoria_produtos ORDER BY categoria";
+        $sql = "SELECT * FROM categoria_produtos";
         $comando = $pdo->prepare($sql);
         $comando->execute();
-        $categoria = $comando->fetchAll(PDO::FETCH_ASSOC);
+        $produtos = $comando->fetchAll(PDO::FETCH_ASSOC);
         Banco::desconectar();
-        return $categoria;
+        return $produtos;
+    }
+
+    public function apagar(){
+        $sql = "DELETE FROM categoria_produtos WHERE id = ?";
+        $banco = Banco::conectar();
+        $comando = $banco->prepare($sql);
+        $comando->execute([$this->id]);
+        Banco::desconectar();
+        return $comando->rowCount();
     }
 }
  

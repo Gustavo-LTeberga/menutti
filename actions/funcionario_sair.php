@@ -13,6 +13,6 @@
 
     session_regenerate_id(true);
 
-header("Location: ../index.php");
+header("Location: ../admin/index.php");
 
 ?>

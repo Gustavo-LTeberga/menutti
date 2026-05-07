@@ -2,7 +2,7 @@
 
 require_once('Banco.php');
 
-class Produto{
+class Cargo{
     // Atributos (id, nome_cargo):
     public $id;
     public $nome_cargo;
@@ -22,9 +22,9 @@ class Produto{
         $sql = "SELECT * FROM cargo_funcionarios";
         $comando = $pdo->prepare($sql);
         $comando->execute();
-        $cargo = $comando->fetchAll(PDO::FETCH_ASSOC);
+        $produtos = $comando->fetchAll(PDO::FETCH_ASSOC);
         Banco::desconectar();
-        return $cargo;
+        return $produtos;
     }
 
     public function listar_por_id(){

@@ -2,7 +2,7 @@
 
 require_once('Banco.php');
 
-class Produto{
+class Contem{
     // Atributos (id, id_produto, id_ingredientes):
     public $id;
     public $id_produto;
