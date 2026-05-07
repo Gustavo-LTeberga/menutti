@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+
+require_once('../model/Produto.php');
+
+$produto = new Produto();
+$listar_produto = $produto->listar();
+
+require_once('../model/Categoria.php');
+
+
+$categoria = new Categoria();
+$listar_categoria = $categoria->listar();
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -66,55 +83,57 @@
 
     <section id="listagem" class="container-fluid d-flex flex-column align-items-center justify-content-center ">
 
-        <div class="row card-funcionarios my-4">
+        <?php foreach ($listar_produto as $p) { ?>
+            <div class="row card-funcionarios my-4">
 
-            <!-- IMAGEM -->
-            <div class="col-12 col-md-4 p-3 text-center my-auto">
-                <img class="img-fluid rounded " src="" alt="imagem">
+                <!-- IMAGEM -->
+                <div class="col-12 col-md-4 p-3 text-center my-auto">
+                    <img class="img-fluid rounded " src="../img/<?= $p['foto']; ?>" alt="imagem">
+                </div>
+
+                <!-- CONTEÚDO -->
+                <div class="col-12 col-md-5 ps-5 ps-md-3 p-3  d-flex flex-column justify-content-center ">
+
+                    <div class="fs-4 fw-bold">
+                        Nome do produto
+                    </div>
+                    <div class="fs-6 fw-semibold">
+                        <?= $p['nome_produto'] ?>
+                    </div>
+                    <div class="fs-4 fw-bold">
+                        Preço
+                    </div>
+                    <div class="fs-6 fw-semibold">
+                        <?= $p['preco'] ?> R$
+                    </div>
+                    <div class="fs-4 fw-bold">
+                        Categoria
+                    </div>
+                    <div class="fs-6 fw-semibold">
+                        <?= $p['id_categoria'] ?>
+                    </div>
+                    <div class="fs-4 fw-bold">
+                        Descrição
+                    </div>
+                    <div class="fs-6 fw-semibold">
+                        <?= $p['descricao'] ?> ...
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
+
+                    <button onclick="abrirEditar()" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
+                        <i class="bi bi-pen-fill"></i>
+                    </button>
+                    <a href="../actions/produto_remover.php?id=<?= $p['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
+                        <i class="bi bi-trash3-fill"></i>
+                    </a>
+
+                </div>
+
             </div>
-
-            <!-- CONTEÚDO -->
-            <div class="col-12 col-md-5 ps-5 ps-md-3 p-3  d-flex flex-column justify-content-center ">
-
-                <div class="fs-4 fw-bold">
-                    Nome do produto
-                </div>
-                <div class="fs-6 fw-semibold">
-                    nome
-                </div>
-                <div class="fs-4 fw-bold">
-                    Preço
-                </div>
-                <div class="fs-6 fw-semibold">
-                    X R$
-                </div>
-                <div class="fs-4 fw-bold">
-                    Categoria
-                </div>
-                <div class="fs-6 fw-semibold">
-                    categoria
-                </div>
-                <div class="fs-4 fw-bold">
-                    Descrição
-                </div>
-                <div class="fs-6 fw-semibold">
-                    ...
-                </div>
-
-            </div>
-
-            <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
-
-                <button onclick="abrirEditar()" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-                <button class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-
-            </div>
-
-        </div>
+        <?php } ?>
 
     </section>
 
@@ -128,17 +147,17 @@
             </div>
 
             <!-- Formulário -->
-            <form action="" method="POST" enctype="multipart/form-data" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+            <form action="../actions/produto_cadastrar.php" method="POST" enctype="multipart/form-data" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
 
                 <div>
                     <label class="fs-4" for="foto">Imagem do produto:</label>
-                    <input type="file" name="foto" id="foto" required class=" form-control fw-semibold">
+                    <input type="file" name="foto" id="fotoProdutoCadastrar" required class=" form-control fw-semibold">
                 </div>
 
                 <!-- Nome -->
                 <div class="">
                     <label class="fs-4 " for="nome">Nome do produto</label>
-                    <input type="text" id="nome" name="nome_completo" required class=" form-control fw-semibold">
+                    <input type="text" id="nomeProdutoCadastrar" name="nome" required class=" form-control fw-semibold">
                 </div>
 
 
@@ -146,16 +165,21 @@
                 <!-- Preço -->
                 <div class="">
                     <label class="fs-4 " for="preco">Preço</label>
-                    <input type="number" name="preco" id="preco" step="0.01" required class="form-control fw-semibold">
+                    <input type="number" name="preco" id="precoProdutoCadastrar" step="0.01" required class="form-control fw-semibold">
                 </div>
 
 
                 <!-- Categoria -->
                 <div class="">
                     <label class="fs-4 " for="cargo">Categoria</label>
-                    <select id="cargo" name="id_cargo" required class=" form-control fw-semibold">
+                    <select id="cargoProdutoCadastrar" name="id_categoria" required class=" form-control fw-semibold">
 
-                        <option value="">Selecione uma categoria</option>
+                        <?php foreach ($listar_categoria as $c) { ?>
+
+                            <option value="<?= $c['id'] ?>"><?= $c['categoria'] ?></option>
+
+                        <?php } ?>
+
 
                     </select>
                 </div>
@@ -164,7 +188,7 @@
 
                 <div class="">
                     <label class="fs-4 " for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao" required class=" form-control fw-semibold">
+                    <input type="text" id="descricaoProdutoCadastrar" name="descricao" required class=" form-control fw-semibold">
                 </div>
 
 
@@ -267,29 +291,37 @@
         <section class="container-fluid d-flex flex-column align-items-center card-categoria-pai mt-5">
 
             <!-- categorias -->
+            <?php foreach ($listar_categoria as $c) { ?>
 
-            <div class="row card-categorias my-4">
+                <div class="row card-categorias my-4">
 
-                <!-- CONTEÚDO -->
-                <div class="col-12 col-md-9 ps-5 p-3  d-flex flex-column justify-content-center ">
 
-                    <div class="fs-4 fw-bold">
-                        Nome da categoria
+
+                    <!-- CONTEÚDO -->
+                    <div class="col-12 col-md-9 ps-5 p-3  d-flex flex-column justify-content-center ">
+
+                        <div class="fs-4 fw-bold">
+                            <?= $c['categoria'] ?>
+                        </div>
+
                     </div>
 
+
+
+
+
+                    <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
+
+                        <a href="../actions/categoria_remover.php?id=<?= $c['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+
+                    </div>
+
+
                 </div>
 
-                
-
-                <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
-
-                    <button class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
-                        <i class="bi bi-trash3-fill"></i>
-                    </button>
-
-                </div>
-
-            </div>
+            <?php } ?>
 
         </section>
 
@@ -310,12 +342,12 @@
             </div>
 
             <!-- Formulário -->
-            <form action="" method="POST" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+            <form action="../actions/categoria_cadastrar.php" method="POST" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
 
                 <!-- Nome -->
                 <div class="">
                     <label class="fs-4 " for="nome">Nome da categoria</label>
-                    <input type="text" id="nome" name="nome_completo" required class=" form-control fw-semibold">
+                    <input type="text" id="nomeCategoria" name="nome_categoria" required class=" form-control fw-semibold">
                 </div>
 
 
@@ -378,12 +410,10 @@
 
         function voltarCategoria() {
 
-             document.getElementById("categorias").classList.remove("hidden");
+            document.getElementById("categorias").classList.remove("hidden");
             document.getElementById("categoriaCadastrar").classList.add("hidden");
 
         }
-
-        
     </script>
 
     <?php include_once('../includes/alertas_includes.php'); ?>

@@ -35,7 +35,7 @@
         <section id="tela-login" class="d-flex justify-content-center align-items-center vh-100">
 
             <div class="container login-card mx-auto color-five">
-                <form action="" method="POST" class="h-100  row">
+                <form action="../actions/funcionario_logar.php" method="POST" class="h-100  row">
                     <!-- topo do card -->
                     <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
 
@@ -47,8 +47,8 @@
 
                     <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center gap-4 my-md-3">
                         <!-- conteúdo -->
-                        <input type="text" class="w-75 form-control" placeholder="Email" required>
-                        <input type="password" class="w-75 form-control" placeholder="Senha" required>
+                        <input type="text" name="email" class="w-75 form-control" placeholder="Email" required>
+                        <input type="password" name="senha" class="w-75 form-control" placeholder="Senha" required>
                         <button class="login-botao mb-3 mb-md-0">Entrar</button>
                     </div>
                 </form>

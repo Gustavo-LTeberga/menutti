@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once('../model/Funcionario.php');
 
 $funcionario = new Funcionario();
@@ -110,7 +112,7 @@ $listar_cargo = $cargo->listar();
                     <button onclick="abrirEditar()" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
                         <i class="bi bi-pen-fill"></i>
                     </button>
-                    <a href="../actions/funcionario_excluir.php?id= <?= $f['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
+                    <a href="../actions/funcionario_excluir.php?id=<?= $f['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
                         <i class="bi bi-trash3-fill"></i>
                     </a>
 

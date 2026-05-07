@@ -11,14 +11,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once('../model/Produto.php');
     $p = new Produto();
 
-    $p->foto = $_POST['foto'];
     $p->nome_produto = strip_tags($_POST['nome']);
     $p->descricao = strip_tags($_POST['descricao']);
     $p->preco = strip_tags($_POST['preco']);
     $p->id_categoria = strip_tags($_POST['id_categoria']);
+    $p->id_funcionario = $_SESSION['usuario']['id'];
 
     // Verificar se os campos foram preenchidos:
-    if (empty($p->foto) || empty($p->nome_produto) || empty($p->descricao) || empty($p->preco) || empty($p->id_categoria)) {
+    if (empty($p->nome_produto) || empty($p->descricao) || empty($p->preco) || empty($p->id_categoria ) || empty($p->id_funcionario )) {
         $_SESSION['alerta'] = [
             'tipo' => 'erro',
             'mensagem' => 'Preencha todos os campos para cadastrar o produto!'
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Se não foi enviada, no banco vai ficar semfoto.jpg
-        $p->foto = 'semfoto.jpg';
+        $p->foto = 'fork-knife.svg';
     }
 
 

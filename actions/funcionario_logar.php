@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             session_start();
             $_SESSION['usuario'] = $resultado[0];
             // Redirecionar para a listagem de contatos:
-            header('Location: ../contatos.php');
+            header('Location: ../admin/admin.php');
             exit();
         }else{
             session_start();

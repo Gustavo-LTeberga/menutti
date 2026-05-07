@@ -2,7 +2,7 @@
 
 // admin_excluir.php?id=X
 session_start();
-if (!isset($_SESSION['funcionario'])) {
+if (!isset($_SESSION['usuario'])) {
     // Retornar ao login:
     header("Location: ../admin/index.php");
     exit;

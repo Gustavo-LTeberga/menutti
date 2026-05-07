@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['categoria_produtos'])){
+if(!isset($_SESSION['usuario'])){
     header("location: ../admin/produtos.php");
     die;
 }                                                       

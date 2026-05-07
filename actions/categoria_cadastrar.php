@@ -12,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     require_once('../model/Categoria.php');
     $c = new Categoria();
-    $c->categoria = ucfirst(strip_tags($_POST['nome']));
+    $c->categoria = ucfirst(strip_tags($_POST['nome_categoria']));
 
 
    // Verificar se nome está vazio:
-    if (empty($c->nome)) {
+    if (empty($c->categoria)) {
         session_start();
         $_SESSION['alerta'] = [
             "tipo" => "erro",
