@@ -1,3 +1,21 @@
+<?php
+
+// require_once('model/Pedido.php');
+// $pedido = new Pedido();
+// $pedido->id = $_GET['id'];
+// $p = $produto->listar_por_id();
+
+// print_r($pedido);
+
+// $listar_produtos = $produto->listar();
+
+// verificar se a sessão do carrinho existe:
+    if (!isset($_SESSION['carrinho'])) {
+        $_SESSION['carrinho'] = array(); // criar um carrinho vazio
+    }
+    print_r($_SESSION['carrinho']); // exibir o conteúdo do carrinho para teste
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -47,6 +65,7 @@
 
     <main class="container-fluid">
 
+    <?php // foreach ($pedido as $p) { ?>
         <div class="row my-card2 my-4">
 
             <!-- IMAGEM -->
@@ -90,19 +109,10 @@
 
         </div>
 
-
-
         <div class="botao2 mt-4">
             Finalizar o Pedido
         </div>
-
-
-
-
-
-
-
-
+        <?php // } ?>
     </main>
 
 

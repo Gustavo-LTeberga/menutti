@@ -6,12 +6,19 @@ require_once('../model/Produto.php');
 
 $produto = new Produto();
 $listar_produto = $produto->listar();
+$dados = $produto->listar_por_id();
 
 require_once('../model/Categoria.php');
 
 
 $categoria = new Categoria();
 $listar_categoria = $categoria->listar();
+
+print_r($produto);
+
+
+
+
 
 ?>
 
@@ -123,9 +130,10 @@ $listar_categoria = $categoria->listar();
 
                 <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
 
-                    <button onclick="abrirEditar()" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
+                    <a href="produtoseditar.php?id=<?= $p['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
                         <i class="bi bi-pen-fill"></i>
-                    </button>
+                    </a>
+
                     <a href="../actions/produto_remover.php?id=<?= $p['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
                         <i class="bi bi-trash3-fill"></i>
                     </a>
@@ -195,68 +203,6 @@ $listar_categoria = $categoria->listar();
                 <!-- Botões -->
                 <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
                     <button class="botao-edits p-2 color-one fw-bold" type="submit">Cadastrar</button>
-                    <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
-                </div>
-
-            </form>
-
-        </div>
-
-    </section>
-
-    <section id="editar" class="d-flex justify-content-center my-3 hidden">
-
-        <div class="card-cadastrar py-4">
-
-            <!-- Cabeçalho -->
-            <div class="py-4">
-                <div class="fs-1 fw-bold text-center">Editar Produto</div>
-            </div>
-
-            <!-- Formulário -->
-            <form action="" method="POST" enctype="multipart/form-data" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
-
-                <div>
-                    <label class="fs-4" for="foto">Alterar Imagem:</label>
-                    <input type="file" name="foto" id="foto" required class=" form-control fw-semibold">
-                </div>
-
-                <!-- Nome -->
-                <div class="">
-                    <label class="fs-4 " for="nome">Nome do produto</label>
-                    <input type="text" id="nome" value="comida" name="nome_completo" required class=" form-control fw-semibold">
-                </div>
-
-
-
-                <!-- Preço -->
-                <div class="">
-                    <label class="fs-4 " for="preco">Preço</label>
-                    <input type="number" name="preco" id="preco" value="10.00" step="0.01" required class="form-control fw-semibold">
-                </div>
-
-
-                <!-- Categoria -->
-                <div class="">
-                    <label class="fs-4 " for="cargo">Categoria</label>
-                    <select id="cargo" name="id_cargo" required class=" form-control fw-semibold">
-
-                        <option value="">Selecione uma categoria</option>
-
-                    </select>
-                </div>
-
-                <!-- Descrição -->
-
-                <div class="">
-                    <label class="fs-4 " for="descricao">Descrição</label>
-                    <input type="text" id="descricao" value="..." name="descricao" required class=" form-control fw-semibold">
-                </div>
-
-
-                <!-- Botões -->
-                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
-                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Salvar Alterações</button>
                     <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
                 </div>
 
@@ -377,19 +323,10 @@ $listar_categoria = $categoria->listar();
 
         }
 
-        function abrirEditar() {
-
-            document.getElementById("cabecalho").classList.add("hidden");
-            document.getElementById("listagem").classList.add("hidden");
-            document.getElementById("editar").classList.remove("hidden");
-
-        }
-
         function voltar() {
             document.getElementById("cabecalho").classList.remove("hidden");
             document.getElementById("listagem").classList.remove("hidden");
             document.getElementById("cadastrar").classList.add("hidden");
-            document.getElementById("editar").classList.add("hidden");
             document.getElementById("categorias").classList.add("hidden");
         }
 

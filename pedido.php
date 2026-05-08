@@ -1,3 +1,15 @@
+<?php
+
+require_once('model/Produto.php');
+$produto = new Produto();
+$produto->id = $_GET['id'];
+$p = $produto->listar_por_id();
+
+// print_r($produto);
+
+// $listar_produtos = $produto->listar();
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -51,24 +63,24 @@
 
             <!-- IMAGEM -->
             <div class="col-12 col-md-6 p-2 text-center my-auto">
-                <img class="img-fluid  rounded w-75" src="" alt="imagem">
+                <img class="img-fluid  rounded w-75" src="img/<?= $p['foto']; ?>" alt="imagem">
             </div>
 
             <!-- CONTEÚDO -->
             <div class="col-12 col-md-6 p-3">
 
                 <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
-                    Nome do Produto
+                    <?php echo $p['nome_produto']; ?>
                 </div>
 
                 <div class="fs-6 fs-md-4 tamanho-texto2">
-                    descrição
+                    <?php echo $p['descricao']; ?>
                 </div>
 
                 <!-- PREÇO -->
                 <div class="row align-items-center mt-4 g-2">
                     <div class="col-12 col-md-4 fs-5 fw-semibold text-center text-md-start">
-                        Preço: X
+                        R$ <?php echo $p['preco']; ?>
                     </div>
 
                     <div class="col-12 col-md-8 col-lg-12 mt-lg-5 mt-3">
@@ -115,7 +127,7 @@
                                 </div>
 
                                 <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <span class="fs-5 fw-bold quantidade">0</span>
+                                    <span class="fs-5 fw-bold complemento">0</span>
                                 </div>
 
                                 <div class="col-4 d-flex justify-content-center">
@@ -141,7 +153,7 @@
                     <textarea placeholder="Ex: sem cebola, molho à parte..."></textarea>
                 </div>
 
-                <a href="index.php" class="botao mt-4">
+                <a href="#" class="botao mt-4" onclick="produto_adicionar_carrinho()">
                     Adicionar No Carrinho
                 </a>
 
@@ -167,6 +179,31 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="static/js/contador.js"></script>
+    <script>
+        function produto_adicionar_carrinho() {
+            // executar um POST para ../actions/produto_adicionar_carrinho.php:
+            const quantidade = document.querySelector('.quantidade').textContent;
+            const complemento = document.querySelector('.complemento').textContent;
+            const observacao = document.querySelector('textarea').value;
+            const id_produto = <?= $p['id']; ?>;
+            // enviar os dados por POST e redirecionar para o carrinho
+            fetch('actions/produto_adicionar_carrinho.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id_produto=${id_produto}&quantidade=${quantidade}&complemento=${complemento}&observacao=${observacao}`
+            }).then(response => {
+                //console.log(response);
+                if (response.status === 200) {
+                    console.log(response);
+                    //window.location.href = 'carrinho.php';
+                } else {
+                    alert('Erro ao adicionar produto ao carrinho');
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -10,12 +10,14 @@ require_once('../model/Produto.php');
 
 $produto = new Produto();
 
+
+
 $produto->id = $_POST['id'];
-$produto->foto = $_POST['foto'];
-$produto->nome_produto = $_POST['nome_produto'];
+$produto->nome_produto = $_POST['nome'];
+$produto->id_categoria = $_POST['id_categoria'];
 $produto->descricao = $_POST['descricao'];
 $produto->preco = $_POST['preco'];
-$produto->id_categoria = $_SESSION['id_categoria']['id'];
+$produto->id_funcionario = $_SESSION['usuario']['id'];
 
 /* FOTO */
 if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ''){
@@ -24,7 +26,7 @@ if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ''){
 
     move_uploaded_file(
         $_FILES['foto']['tmp_name'],
-        "../pics/" . $novoNome
+        "../img/" . $novoNome
     );
 
     $produto->foto = $novoNome;
@@ -38,6 +40,6 @@ if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ''){
 $produto->editar();
 
 /* Retorno */
-header("Location: ../admin/painel.php");
+header("Location: ../admin/produtos.php");
 exit;
 ?>

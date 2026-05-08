@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $caminho_foto = '../img/' . $nome_foto;
 
         // Verificar o tamanho (máximo 500kb) e o formato do arquivo (jpg, jpeg, png):
-        $tamanho_maximo = 500 * 1024; // 500kb
+        $tamanho_maximo = 2000 * 1024; // 200kb
         $formatos_permitidos = ['jpg', 'jpeg', 'png'];
         if ($foto['size'] > $tamanho_maximo) {
             $_SESSION['alerta'] = [
                 'tipo' => 'erro',
                 'mensagem' => 'A foto deve ter no máximo 500kb!'
             ];
-            header('Location: ../admin/painel.php');
+            header('Location: ../admin/produto.php');
             exit();
         }
         if (!in_array($extensao, $formatos_permitidos)) {

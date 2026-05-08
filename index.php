@@ -1,3 +1,29 @@
+<?php
+
+require_once('model/Produto.php');
+
+$produto = new Produto();
+if (isset($_GET['categoria'])) {
+    $categoria_id = $_GET['categoria'];
+    $produto->id_categoria = $categoria_id;
+    $listar_produtos = $produto->listar_por_categoria();
+} else {
+    $listar_produtos = $produto->listar();
+}
+
+// print_r($listar_produtos);
+
+// $listar_produtos = $produto->listar();
+
+require_once('model/Categoria.php');
+
+$categoria = new Categoria();
+$listar_categoria = $categoria->listar();
+
+// print_r($listar_categoria);
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -48,7 +74,11 @@
             <!-- Centro (menu desktop) -->
             <div class="col-md-8 d-none d-md-flex justify-content-center">
                 <ul class="d-flex list-unstyled m-0 gap-4">
-                    <li><a href="#" data-link="comidas" class="nav-link-custom active">Comidas</a></li>
+                    <?php foreach ($listar_categoria as $categoria) { ?>
+                        <li><a href="index.php?categoria=<?= $categoria["id"] ?>" data-link="<?= $categoria["categoria"] ?>" class="nav-link-custom"><?= $categoria["categoria"] ?></a></li>
+                    <?php } ?>
+
+                    <!-- <li><a href="#" data-link="sobremesa" class="nav-link-custom">Sobremesa</a></li> -->
                 </ul>
             </div>
 
@@ -71,6 +101,7 @@
             <div id="menu" class="col-12 d-md-none d-none mt-3">
                 <ul class="d-flex flex-column list-unstyled m-0 gap-3">
                     <li><a href="#" data-link="comidas" class="nav-link-custom active">Comidas</a></li>
+                    <li><a href="#" data-link="sobremesa" class="nav-link-custom">Sobremesa</a></li>
                 </ul>
             </div>
 
@@ -80,41 +111,45 @@
 
     <main class="container-fluid">
 
-        <div class="row my-card my-4">
 
-            <!-- IMAGEM -->
-            <div class="col-12 col-md-4 p-2 text-center my-auto">
-                <img class="img-fluid rounded" src="" alt="imagem">
-            </div>
+        <?php foreach ($listar_produtos as $p) { ?>
+            <div class="row my-card my-4">
 
-            <!-- CONTEÚDO -->
-            <div class="col-12 col-md-8 p-3">
-
-                <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
-                    Nome do Produto
+                <!-- IMAGEM -->
+                <div class="col-12 col-md-4 p-2 text-center my-auto">
+                    <img class="img-fluid rounded" src="img/<?= $p['foto']; ?>" alt="imagem">
                 </div>
 
-                <div class="fs-6 fs-md-4 tamanho-texto">
-                    descrição
-                </div>
+                <!-- CONTEÚDO -->
+                <div class="col-12 col-md-8 p-3">
 
-                <!-- PREÇO + BOTÃO -->
-                <div class="row align-items-center mt-3 g-2">
-                    <div class="col-12 col-md-4 fs-5 fw-semibold text-center text-md-start">
-                        Preço: X
+
+
+                    <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
+                        <?php echo $p['nome_produto']; ?>
                     </div>
 
-                    <a href="pedido.php" class="col-12 col-md-8">
-                        <div href="pedido.php" class="botao">
-                            Adicionar o Pedido
+                    <div class="fs-6 fs-md-4 tamanho-texto">
+                        <?php echo $p['descricao']; ?>
+                    </div>
+
+                    <!-- PREÇO + BOTÃO -->
+                    <div class="row align-items-center mt-3 g-2">
+                        <div class="col-12 col-md-4 fs-5 fw-semibold text-center text-md-start">
+                            R$ <?php echo $p['preco']; ?>
                         </div>
-                    </a>
+
+                        <a href="pedido.php?id=<?=$p['id']?>" class="col-12 col-md-8">
+                            <div href="pedido.php" class="botao">
+                                Adicionar o Pedido
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-
+        <?php } ?>
 
 
 

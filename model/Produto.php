@@ -41,6 +41,17 @@ class Produto{
         Banco::desconectar();
         return $produto;
     }
+
+    public function listar_por_categoria(){
+        $pdo = Banco::conectar();
+        $sql = "SELECT * FROM produtos WHERE id_categoria = ?";
+        $comando = $pdo->prepare($sql);
+        $comando->execute([$this->id_categoria]);
+        $produtos = $comando->fetchAll(PDO::FETCH_ASSOC);
+        Banco::desconectar();
+        return $produtos;
+    }
+
     public function apagar(){
         $pdo = Banco::conectar();
         $sql = "DELETE FROM produtos WHERE id = ?";
