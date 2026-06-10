@@ -52,112 +52,65 @@ $listar_categoria = $categoria->listar();
 
 </head>
 
-<body class="container-fluid p-0 color-three inter-uniquifier">
+<body>
 
     <!-- Mobile First -->
 
-    <header class="container-fluid sticky-top color-two">
-
-        <!-- Título -->
-        <div class="text-center fs-1 text-white p-4 great-vibes-regular">
-            Menutti
-        </div>
-
-        <!-- Navbar -->
-        <nav class="row color-four align-items-center p-3">
-
-            <!-- Logo -->
-            <div class="col-6 col-md-2 fs-4 fw-bold ">
-                <img class="w-50 img-fluid" src="img/letra.png" alt="Logo">
-            </div>
-
-            <!-- Centro (menu desktop) -->
-            <div class="col-md-8 d-none d-md-flex justify-content-center">
-                <ul class="d-flex list-unstyled m-0 gap-4">
-                    <?php foreach ($listar_categoria as $categoria) { ?>
-                        <li><a href="index.php?categoria=<?= $categoria["id"] ?>" data-link="<?= $categoria["categoria"] ?>" class="nav-link-custom"><?= $categoria["categoria"] ?></a></li>
-                    <?php } ?>
-
-                    <!-- <li><a href="#" data-link="sobremesa" class="nav-link-custom">Sobremesa</a></li> -->
-                </ul>
-            </div>
-
-            <!-- Direita (mobile + desktop) -->
-            <div class="col-6 col-md-2 d-flex justify-content-end align-items-center gap-3">
-
-                <!-- Carrinho -->
-                <a href="carrinho.php" class="text-white text-decoration-none fs-5 pe-3">
+    <header class="site-header">
+        <div class="header-top">
+            <div class="logo-mark">M</div>
+            <span class="site-title">Menutti</span>
+            <div class="header-actions">
+                <a href="carrinho.php" class="btn-cart" aria-label="Carrinho">
                     <i class="bi bi-cart-fill"></i>
                 </a>
-
-                <!-- Botão mobile -->
-                <button onclick="toggleMenu()" class="btn btn-outline-light d-md-none">
-                    ☰
+                <button class="btn-menu-toggle d-md-none" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <i class="bi bi-list" id="menu-icon"></i>
                 </button>
-
             </div>
+        </div>
 
-            <!-- Menu mobile (colapsado) -->
-            <div id="menu" class="col-12 d-md-none d-none mt-3">
-                <ul class="d-flex flex-column list-unstyled m-0 gap-3">
-                    <li><a href="#" data-link="comidas" class="nav-link-custom active">Comidas</a></li>
-                    <li><a href="#" data-link="sobremesa" class="nav-link-custom">Sobremesa</a></li>
-                </ul>
-            </div>
-
+        <!-- Categorias desktop -->
+        <nav class="cat-bar d-none d-md-block" aria-label="Categorias">
+            <ul class="cat-list">
+                <?php foreach ($listar_categoria as $categoria) { ?>
+                    <li><a href="index.php?categoria=<?= $categoria["id"] ?>" class="cat-link"><?= $categoria["categoria"] ?></a></li>
+                <?php } ?>
+            </ul>
         </nav>
 
+        <!-- Menu mobile colapsável -->
+        <div class="mobile-menu d-md-none" id="mobile-menu">
+            <ul class="cat-list">
+                <?php foreach ($listar_categoria as $categoria) { ?>
+                    <li><a href="index.php?categoria=<?= $categoria["id"] ?>" class="cat-link"><?= $categoria["categoria"] ?></a></li>
+                <?php } ?>
+            </ul>
+        </div>
     </header>
 
-    <main class="container-fluid">
 
 
+    <main>
+
+        <!-- Card -->
         <?php foreach ($listar_produtos as $p) { ?>
-            <div class="row my-card my-4">
+            <div class="product-card">
+                <img class="product-img" src="img/<?= $p['foto']; ?>" alt="<?= $p['nome_produto']; ?>">
+                <div class="product-body">
+                    <div>
+                        <p class="product-name"><?php echo $p['nome_produto']; ?></p>
+                        <p class="product-desc"><?php echo $p['descricao']; ?></p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">R$ <?php echo $p['preco']; ?></span>
 
-                <!-- IMAGEM -->
-                <div class="col-12 col-md-4 p-2 text-center my-auto">
-                    <img class="img-fluid rounded" src="img/<?= $p['foto']; ?>" alt="imagem">
+                        <a href="pedido.php?id=<?= $p['id'] ?>" class="btn-add">+ Adicionar</a>
+
+                    </div>
                 </div>
-
-                <!-- CONTEÚDO -->
-                <div class="col-12 col-md-8 p-3">
-
-
-
-                    <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
-                        <?php echo $p['nome_produto']; ?>
-                    </div>
-
-                    <div class="fs-6 fs-md-4 tamanho-texto">
-                        <?php echo $p['descricao']; ?>
-                    </div>
-
-                    <!-- PREÇO + BOTÃO -->
-                    <div class="row align-items-center mt-3 g-2">
-                        <div class="col-12 col-md-4 fs-5 fw-semibold text-center text-md-start">
-                            R$ <?php echo $p['preco']; ?>
-                        </div>
-
-                        <a href="pedido.php?id=<?=$p['id']?>" class="col-12 col-md-8">
-                            <div href="pedido.php" class="botao">
-                                Adicionar o Pedido
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-
             </div>
         <?php } ?>
-
-
-
-
-
-
-
-
 
 
     </main>
@@ -166,7 +119,7 @@ $listar_categoria = $categoria->listar();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="static/js/navbar.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 
 </html>

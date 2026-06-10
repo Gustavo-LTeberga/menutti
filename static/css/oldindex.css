@@ -1,0 +1,121 @@
+body {
+  height: 100%; 
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+img{
+  height: 100%;
+}
+
+header {
+  width: 100%;
+}
+
+.color-one{
+    background-color: #Cee4f2;
+}
+.color-two{
+    background-color: #261C14;
+}
+.color-three{
+    background-color: #F2C6A0;
+}
+.color-four{
+    background-color: #734B34;
+}
+.color-five{
+    background-color: #BF8F73;
+}
+
+/*tamanho texto*/
+.tamanho-texto{
+      height: 10rem;
+}
+
+/* LINKS */
+.nav-link-custom {
+  position: relative;
+  display: block;
+  padding: 8px 12px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+/* underline */
+.nav-link-custom::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 2px;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover::after {
+  width: 100%;
+}
+
+.nav-link-custom.active::after {
+  width: 100%;
+}
+
+/* hover UX */
+.nav-link-custom:hover {
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 6px;
+}
+
+img {
+  width: 100%;
+  height: auto; 
+
+}
+
+.tamanho-texto {
+  min-height: 6rem;
+}
+
+/* Card */
+.my-card {
+  width: 100%;
+  max-width: 1000px; 
+  background-color: white;
+  border: 7px solid #261C14;
+  border-radius: 1rem;
+  margin: 2rem auto;
+}
+
+/* botão */
+.botao {
+  background-color: #99cdf0;
+  color: #000;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+.botao:hover {
+  background-color: #Cee4f2;
+}
+
+/*fonte*/
+
+.great-vibes-regular {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
