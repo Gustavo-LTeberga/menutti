@@ -1,0 +1,270 @@
+  :root {
+      --c-dark:    #261C14;
+      --c-mid:     #734B34;
+      --c-warm:    #F2C6A0;
+      --c-light:   #FAF0E6;
+      --c-blue:    #99cdf0;
+      --c-blue-lt: #Cee4f2;
+      --c-white:   #ffffff;
+      --radius-card: 14px;
+      --radius-btn:  10px;
+      --shadow-card: 0 2px 12px rgba(38,28,20,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background-color: var(--c-light);
+      font-family: "Inter", sans-serif;
+      color: var(--c-dark);
+      margin: 0;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background-color: var(--c-dark);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn-back {
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 8px;
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      transition: border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-back:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.08); color: #fff; }
+
+    .header-title {
+      font-family: "Great Vibes", cursive;
+      font-size: 1.9rem;
+      color: var(--c-warm);
+      line-height: 1;
+      flex: 1;
+    }
+
+    .header-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 7rem;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 1rem;
+      padding-left: 2px;
+    }
+
+    /* ── CART ITEM ── */
+    .cart-item {
+      background: var(--c-white);
+      border: 1.5px solid rgba(38,28,20,0.12);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      margin-bottom: 0.75rem;
+    }
+
+    .cart-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .cart-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cart-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cart-price {
+      font-size: 13px;
+      color: var(--c-mid);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    /* ── CONTADOR ── */
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .counter-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(38,28,20,0.18);
+      background: var(--c-light);
+      color: var(--c-dark);
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      line-height: 1;
+    }
+    .counter-btn:hover { background: var(--c-blue-lt); border-color: var(--c-blue); }
+    .counter-btn:active { transform: scale(0.93); }
+
+    .counter-qty {
+      font-size: 15px;
+      font-weight: 600;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #b89080;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 4px;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-remove:hover { color: #c0392b; }
+
+    /* ── OBSERVAÇÃO ── */
+    .obs-card {
+      background: var(--c-white);
+      border: 1.5px solid rgba(38,28,20,0.12);
+      border-radius: var(--radius-card);
+      padding: 1rem 1.125rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .obs-label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .obs-textarea {
+      width: 100%;
+      min-height: 80px;
+      border: 1.5px solid rgba(38,28,20,0.18);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-family: "Inter", sans-serif;
+      resize: none;
+      outline: none;
+      color: var(--c-dark);
+      background: var(--c-light);
+      transition: border-color 0.2s;
+    }
+    .obs-textarea:focus { border-color: var(--c-blue); }
+    .obs-textarea::placeholder { color: #b0a090; }
+
+    /* ── RESUMO ── */
+    .summary-card {
+      background: var(--c-white);
+      border: 1.5px solid rgba(38,28,20,0.12);
+      border-radius: var(--radius-card);
+      padding: 1rem 1.125rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #7a6858;
+      padding: 4px 0;
+    }
+
+    .summary-row.total {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--c-dark);
+      border-top: 1px solid rgba(38,28,20,0.10);
+      margin-top: 8px;
+      padding-top: 12px;
+    }
+
+    /* ── BOTTOM BAR ── */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--c-white);
+      border-top: 1px solid rgba(38,28,20,0.10);
+      padding: 1rem;
+      z-index: 50;
+    }
+
+    .btn-finalizar {
+      display: block;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      background-color: var(--c-dark);
+      color: var(--c-warm);
+      border: none;
+      border-radius: var(--radius-btn);
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-align: center;
+    }
+    .btn-finalizar:hover { background-color: var(--c-mid); }
+    .btn-finalizar:active { transform: scale(0.98); }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #b0a090;
+    }
+    .empty-state i { font-size: 48px; margin-bottom: 1rem; display: block; }
+    .empty-state p { font-size: 14px; margin: 0; }

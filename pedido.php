@@ -30,155 +30,102 @@ $p = $produto->listar_por_id();
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/css/index.css">
-    <link rel="stylesheet" href="static/css/pedido.css">
+
+    <link rel="stylesheet" href="static/css/stylepedido.css">
 
     <!-- icones -->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+
+
 </head>
 
-<body class="container-fluid p-0 color-four inter-uniquifier ">
+
+<body>
 
     <!-- Mobile First -->
 
-    <header class="container-fluid sticky-top color-two d-flex align-items-center">
-
-        <!-- Título -->
-
-        <div class="col-md-5 fs-1 ">
-            <a class="ps-3 text-white" href="index.php"><i class="bi bi-arrow-left"></i></a>
-        </div>
-        <div class="ps-lg-5 col-md-7 fs-1 text-white p-4 great-vibes-regular">
-            Menutti
-        </div>
-
-
+    <header class="site-header">
+        <a href="index.php" class="btn-back" aria-label="Voltar">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <span class="header-title">Menutti</span>
     </header>
 
-    <main class="my-3 container color-five rounded ">
 
-        <div class="row my-4 mx-auto">
+    <!-- Hero imagem do produto -->
 
-            <!-- IMAGEM -->
-            <div class="col-12 col-md-6 p-2 text-center my-auto">
-                <img class="img-fluid  rounded w-75" src="img/<?= $p['foto']; ?>" alt="imagem">
-            </div>
+    <!-- Resolver tamanho da imagem depois -->
+   <div class="product-hero" style="background-image: url('img/<?= $p['foto']; ?>'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+        <span class="hero-badge">Entrada</span> <!-- alterar depois aqui -->
+    </div>
 
-            <!-- CONTEÚDO -->
-            <div class="col-12 col-md-6 p-3">
+    <div class="content-wrap">
 
-                <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
-                    <?php echo $p['nome_produto']; ?>
-                </div>
+        <!-- Info principal -->
+        <div class="product-card">
+            <p class="product-name"> <?php echo $p['nome_produto']; ?></p>
+            <p class="product-price">R$ <?php echo $p['preco']; ?></p>
+            <p class="product-desc"><?php echo $p['descricao']; ?></p>
 
-                <div class="fs-6 fs-md-4 tamanho-texto2">
-                    <?php echo $p['descricao']; ?>
-                </div>
+            <hr class="divider">
 
-                <!-- PREÇO -->
-                <div class="row align-items-center mt-4 g-2">
-                    <div class="col-12 col-md-4 fs-5 fw-semibold text-center text-md-start">
-                        R$ <?php echo $p['preco']; ?>
-                    </div>
+            <!-- Opções / extras -->
+            <!-- <p class="section-title">Personalize</p> -->
 
-                    <div class="col-12 col-md-8 col-lg-12 mt-lg-5 mt-3">
-                        <div class="contador row align-items-center text-center">
-
-                            <div class="col-4 d-flex justify-content-center">
-                                <button class="botao-redondo btn-minus">-</button>
-                            </div>
-
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <span class="fs-5 fw-bold quantidade">1</span>
-                            </div>
-
-                            <div class="col-4 d-flex justify-content-center">
-                                <button class="botao-redondo btn-plus">+</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="row my-2 mx-auto">
-
-                <div class="col-12 fs-1 ms-md-5 fw-bold">
-                    Adicional
-                </div>
-
-                <div class="my-card2">
-
-                    <div class=" row d-flex align-items-center my-4">
-
-                        <div class="col-4 fs-5 fw-semibold ps-4">
-                            Complemento
-                        </div>
-
-                        <div class="col-8 ">
-                            <div class="contador row align-items-center text-center ps-5" data-max="10">
-
-                                <div class="col-4 d-flex justify-content-center">
-                                    <button class="botao-redondo btn-minus">-</button>
-                                </div>
-
-                                <div class="col-4 d-flex justify-content-center align-items-center">
-                                    <span class="fs-5 fw-bold complemento">0</span>
-                                </div>
-
-                                <div class="col-4 d-flex justify-content-center">
-                                    <button class="botao-redondo btn-plus">+</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="row my-4 mx-auto">
-
-                <div class="col-12 fs-1 fw-bold ps-5">
-                    Observação
-                </div>
-
-                <div class="col-12 d-flex justify-content-center">
-                    <textarea placeholder="Ex: sem cebola, molho à parte..."></textarea>
-                </div>
-
-                <a href="#" class="botao mt-4" onclick="produto_adicionar_carrinho()">
-                    Adicionar No Carrinho
-                </a>
-
-            </div>
+            <!-- <label class="option-item"> -->
+            <!-- <div> -->
+            <!-- <p class="option-label">Sem alho</p> -->
+            <!-- </div> -->
+            <!-- <input type="checkbox" class="option-check"> -->
+            <!-- </label> -->
 
 
 
+            <hr class="divider">
+
+            <!-- Observação -->
+            <p class="section-title">Observação</p>
+            <textarea class="obs-textarea" placeholder="Ex: alergia a frutos do mar, sem pimenta…"></textarea>
         </div>
 
+    </div>
 
 
+    <div class="bottom-bar">
+        <div class="bottom-inner">
+            <div class="counter">
+                <button class="counter-btn" onclick="changeQty(-1)">−</button>
+                <span class="counter-qty" id="qty">1</span>
+                <button class="counter-btn" onclick="changeQty(1)">+</button>
+            </div>
+            <a href="carrinho.php" class="btn-add" id="btn-add">
+                Adicionar · R$ <?= number_format($p['preco'], 2, ',', '.') ?>
+            </a>
+        </div>
+    </div>
 
+    <!-- <img class="img-fluid  rounded w-75" src="img/<?= $p['foto']; ?>" alt="imagem"> -->
 
-
-
-
-
-
-    </main>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="static/js/contador.js"></script>
+
+    <script>
+        const BASE_PRICE = <?= $p['preco']; ?>;
+        let qty = 1;
+
+        function changeQty(delta) {
+            qty = Math.max(1, qty + delta);
+            document.getElementById('qty').textContent = qty;
+            const total = (BASE_PRICE * qty).toFixed(2).replace('.', ',');
+            document.getElementById('btn-add').textContent = `Adicionar · R$ ${total}`;
+        }
+    </script>
+
     <script>
         function produto_adicionar_carrinho() {
             // executar um POST para ../actions/produto_adicionar_carrinho.php:

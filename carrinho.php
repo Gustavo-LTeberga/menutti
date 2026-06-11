@@ -10,10 +10,10 @@
 // $listar_produtos = $produto->listar();
 
 // verificar se a sessão do carrinho existe:
-    if (!isset($_SESSION['carrinho'])) {
-        $_SESSION['carrinho'] = array(); // criar um carrinho vazio
-    }
-    print_r($_SESSION['carrinho']); // exibir o conteúdo do carrinho para teste
+if (!isset($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = array(); // criar um carrinho vazio
+}
+//print_r($_SESSION['carrinho']); // exibir o conteúdo do carrinho para teste
 ?>
 
 <!doctype html>
@@ -36,90 +36,79 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/css/index.css">
-    <link rel="stylesheet" href="static/css/carrinho.css">
+    <link rel="stylesheet" href="static/css/stylecarrinho.css">
 
-      <!-- icones -->
+    <!-- icones -->
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
 
-<body class="container-fluid p-0 color-four inter-uniquifier">
+<body>
 
-    <!-- Mobile First -->
-
-    <header class="container-fluid sticky-top color-two d-flex align-items-center">
-
-        <!-- Título -->
-
-        <div class="col-md-5 fs-1 ">
-            <a class="ps-3 text-white" href="index.php"><i class="bi bi-arrow-left"></i></a>
-        </div>
-        <div class="ps-lg-5 col-md-7 fs-1 text-white p-4 great-vibes-regular">
-            Menutti
-        </div>
-
-
+    <header class="site-header">
+        <a href="index.php" class="btn-back" aria-label="Voltar">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <span class="header-title">Menutti</span>
+        <span class="header-count">X itens</span>
     </header>
 
-    <main class="container-fluid">
+    <main>
+        <p class="section-label">Seu pedido</p>
 
-    <?php // foreach ($pedido as $p) { ?>
-        <div class="row my-card2 my-4">
-
-            <!-- IMAGEM -->
-            <div class="col-12 col-md-4 p-2 text-center my-auto">
-                <img class="img-fluid rounded" src="" alt="imagem">
+        <!-- Item  -->
+        <div class="cart-item">
+            <div class="cart-img" style="background: linear-gradient(135deg,#F2C6A0,#e0a87c);"></div>
+            <div class="cart-info">
+                <p class="cart-name">Nome do produto</p>
+                <p class="cart-price">R$ X</p>
             </div>
-
-            <!-- CONTEÚDO -->
-            <div class="col-12 col-md-8 p-3">
-
-                <div class="text-center text-md-start fs-3 fs-md-1 fw-bold">
-                    Nome do Produto
-                </div>
-
-                <!-- PREÇO + BOTÃO -->
-                <div class="row align-items-center mt-4 g-2">
-                    <div class="col-4 fs-5 fw-semibold text-center text-md-start">
-                        Preço: X
-                    </div>
-
-                    <div class="col-8 mt-lg-5 mt-3">
-                     <div class="contador row align-items-center text-center">
-
-                            <div class="col-4 d-flex justify-content-center">
-                                <button class="botao-redondo btn-minus">-</button>
-                            </div>
-
-                            <div class="col-4 d-flex justify-content-center align-items-center">
-                                <span class="fs-5 fw-bold quantidade">1</span>
-                            </div>
-
-                            <div class="col-4 d-flex justify-content-center">
-                                <button class="botao-redondo btn-plus">+</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
+            <div class="counter">
+                <button class="counter-btn btn-minus" onclick="changeQty(this, -1)">−</button>
+                <span class="counter-qty">1</span>
+                <button class="counter-btn btn-plus" onclick="changeQty(this, 1)">+</button>
             </div>
-
+            <button class="btn-remove" aria-label="Remover item"><i class="bi bi-trash3"></i></button>
         </div>
 
-        <div class="botao2 mt-4">
-            Finalizar o Pedido
+        <!-- Observação -->
+        <div class="obs-card">
+            <span class="obs-label">Alguma observação?</span>
+            <textarea class="obs-textarea" placeholder="Ex: sem cebola, ponto da carne bem passado…"></textarea>
         </div>
-        <?php // } ?>
+
+        <!-- Resumo -->
+        <div class="summary-card">
+            <div class="summary-row">
+                <span>Nome Produto × Quantidade</span>
+                <span>R$ X</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>R$ X</span>
+            </div>
+        </div>
     </main>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src="static/js/contador.js"></script>
+
+    <div class="bottom-bar">
+        <button class="btn-finalizar">Enviar pedido para a cozinha</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeQty(btn, delta) {
+            const counter = btn.closest('.counter');
+            const qtyEl = counter.querySelector('.counter-qty');
+            let qty = parseInt(qtyEl.textContent) + delta;
+            if (qty < 1) qty = 1;
+            qtyEl.textContent = qty;
+        }
+    </script>
 </body>
+
+</html>
 
 </html>

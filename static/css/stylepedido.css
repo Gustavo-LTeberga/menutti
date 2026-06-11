@@ -1,0 +1,258 @@
+
+    :root {
+      --c-dark:    #261C14;
+      --c-mid:     #734B34;
+      --c-warm:    #F2C6A0;
+      --c-light:   #FAF0E6;
+      --c-blue:    #99cdf0;
+      --c-blue-lt: #Cee4f2;
+      --c-white:   #ffffff;
+      --radius-card: 14px;
+      --radius-btn:  10px;
+      --shadow-card: 0 2px 12px rgba(38,28,20,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background-color: var(--c-light);
+      font-family: "Inter", sans-serif;
+      color: var(--c-dark);
+      margin: 0;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background-color: var(--c-dark);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .btn-back {
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 8px;
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      transition: border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-back:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.08); color: #fff; }
+
+    .header-title {
+      font-family: "Great Vibes", cursive;
+      font-size: 1.9rem;
+      color: var(--c-warm);
+      line-height: 1;
+    }
+
+    /* ── HERO IMAGEM ── */
+    .product-hero {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(160deg, #F2C6A0 0%, #c8914e 60%, #734B34 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .product-hero { height: 320px; }
+    }
+
+    .hero-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--c-dark);
+      color: var(--c-warm);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── CONTEÚDO ── */
+    .content-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 1rem 8rem;
+    }
+
+    .product-card {
+      background: var(--c-white);
+      border: 1.5px solid rgba(38,28,20,0.12);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 1.25rem;
+      margin-top: -24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--c-mid);
+      margin: 0 0 12px;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #6b5a4e;
+      margin: 0;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(38,28,20,0.08);
+      margin: 1.125rem 0;
+    }
+
+    /* ── EXTRAS / OPÇÕES ── */
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(38,28,20,0.06);
+    }
+    .option-item:last-child { border-bottom: none; }
+
+    .option-label { font-size: 13px; font-weight: 500; }
+    .option-price { font-size: 12px; color: var(--c-mid); margin-top: 1px; }
+
+    .option-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(38,28,20,0.25);
+      background: var(--c-light);
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: background 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+    .option-check:checked {
+      background: var(--c-blue);
+      border-color: var(--c-blue);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5l3.5 3.5L11 1' stroke='%23261C14' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 11px;
+    }
+
+    /* ── OBSERVAÇÃO ── */
+    .obs-textarea {
+      width: 100%;
+      min-height: 72px;
+      border: 1.5px solid rgba(38,28,20,0.18);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-family: "Inter", sans-serif;
+      resize: none;
+      outline: none;
+      color: var(--c-dark);
+      background: var(--c-light);
+      transition: border-color 0.2s;
+    }
+    .obs-textarea:focus { border-color: var(--c-blue); }
+    .obs-textarea::placeholder { color: #b0a090; }
+
+    /* ── BOTTOM BAR ── */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--c-white);
+      border-top: 1px solid rgba(38,28,20,0.10);
+      padding: 1rem;
+      z-index: 50;
+    }
+
+    .bottom-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ── CONTADOR ── */
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .counter-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(38,28,20,0.18);
+      background: var(--c-light);
+      color: var(--c-dark);
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .counter-btn:hover { background: var(--c-blue-lt); border-color: var(--c-blue); }
+    .counter-btn:active { transform: scale(0.93); }
+
+    .counter-qty {
+      font-size: 16px;
+      font-weight: 600;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .btn-add {
+      flex: 1;
+      background-color: var(--c-dark);
+      color: var(--c-warm);
+      border: none;
+      border-radius: var(--radius-btn);
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-align: center;
+    }
+    .btn-add:hover { background-color: var(--c-mid); }
+    .btn-add:active { transform: scale(0.98); }
