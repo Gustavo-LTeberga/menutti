@@ -14,7 +14,7 @@ require_once('../model/Categoria.php');
 $categoria = new Categoria();
 $listar_categoria = $categoria->listar();
 
-print_r($produto);
+// print_r($produto);
 
 
 
@@ -42,9 +42,7 @@ print_r($produto);
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/admin-index.css">
-    <link rel="stylesheet" href="../static/css/admin-funcionarios.css">
-    <link rel="stylesheet" href="../static/css/admin-produtos.css">
+    <link rel="stylesheet" href="../static/css/styleprodutos.css">
 
     <!-- icones -->
 
@@ -52,262 +50,202 @@ print_r($produto);
 
 </head>
 
-<body class="container-fluid p-0 color-three inter-uniquifier">
+<body>
 
-    <!-- Mobile First -->
-
-
-
-    <!-- Voltar -->
-
-    <header id="cabecalho" class="container-fluid sticky-top color-two d-flex align-items-center justify-content-between p-4">
-
-        <!-- Título -->
-
-        <div class=" fs-1 ">
-            <a class="ps-2 ps-md-5 text-white" href="admin.php"><i class="bi bi-arrow-left"></i></a>
-        </div>
-
-
-        <!-- Adicionar e Gerenciar-->
-
-        <div class="d-flex align-items-center jutify-content-center">
-
-            <button onclick="abrirCadastrar()" class="me-3 color-one2  fs-1 text-white p-2 d-flex justify-content-center botao ">
-                <i class="bi bi-plus-lg px-4 px-md-2"></i> <span class="texto">Produtos</span>
+    <!-- ══ HEADER ══ -->
+    <header class="admin-header" id="cabecalho">
+        <a href="admin.php" class="btn-icon" aria-label="Voltar">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <span class="admin-header-title">Produtos</span>
+        <div class="d-flex gap-2">
+            <!-- PHP: onclick="abrirCadastrar()" -->
+            <button class="btn-icon" onclick="abrirCadastrar()" aria-label="Novo produto" title="Novo produto">
+                <i class="bi bi-plus-lg"></i>
             </button>
-
-            <button onclick="abrirCategoria()" class="me-3 color-four  fs-1 text-white p-2 d-flex justify-content-center botao ">
-                <i class="bi bi-gear-fill px-4 px-md-2"></i> <span class="texto">Categorias</span>
+            <!-- PHP: onclick="abrirCategoria()" -->
+            <button class="btn-icon" onclick="abrirCategoria()" aria-label="Gerenciar categorias" title="Categorias">
+                <i class="bi bi-tag-fill"></i>
             </button>
-
         </div>
-
-
     </header>
 
+    <!-- ══ LISTAGEM ══ -->
+    <main class="admin-main" id="listagem">
 
-
-    <section id="listagem" class="container-fluid d-flex flex-column align-items-center justify-content-center ">
+        <p class="section-label mt-2">Cardápio cadastrado</p>
 
         <?php foreach ($listar_produto as $p) { ?>
-            <div class="row card-funcionarios my-4">
 
-                <!-- IMAGEM -->
-                <div class="col-12 col-md-4 p-3 text-center my-auto">
-                    <img class="img-fluid rounded " src="../img/<?= $p['foto']; ?>" alt="imagem">
+            <!-- Produto 1 -->
+            <div class="list-card">
+                <img class="list-card-img" src="../img/<?= $p['foto'] ?>" alt="sem imagem">
+                <div class="list-card-body">
+                    <p class="list-card-title"><?= $p['nome_produto'] ?></p>
+                    <p class="list-card-meta">
+                         · 
+                        <?= $p['id_categoria'] ?> · <span class="price-tag">R$ <?= number_format($p['preco'], 2, ',', '.') ?></span>
+                    </p>
+                    <p class="list-card-meta" style="margin-top:3px;-webkit-line-clamp:1;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;">
+                        <?= $p['descricao'] ?>
+
+                    </p>
                 </div>
+                <div class="list-card-actions">
 
-                <!-- CONTEÚDO -->
-                <div class="col-12 col-md-5 ps-5 ps-md-3 p-3  d-flex flex-column justify-content-center ">
-
-                    <div class="fs-4 fw-bold">
-                        Nome do produto
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $p['nome_produto'] ?>
-                    </div>
-                    <div class="fs-4 fw-bold">
-                        Preço
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $p['preco'] ?> R$
-                    </div>
-                    <div class="fs-4 fw-bold">
-                        Categoria
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $p['id_categoria'] ?>
-                    </div>
-                    <div class="fs-4 fw-bold">
-                        Descrição
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $p['descricao'] ?> ...
-                    </div>
-
-                </div>
-
-                <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
-
-                    <a href="produtoseditar.php?id=<?= $p['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
+                    <a href="produtoseditar.php?id=<?= $p['id'] ?>" class="action-btn edit" aria-label="Editar">
                         <i class="bi bi-pen-fill"></i>
                     </a>
 
-                    <a href="../actions/produto_remover.php?id=<?= $p['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
+                    <a href="../actions/produto_remover.php?id=<?= $p['id'] ?>" class="action-btn del" aria-label="Excluir">
                         <i class="bi bi-trash3-fill"></i>
                     </a>
-
                 </div>
-
             </div>
+
+
         <?php } ?>
 
-    </section>
+    </main>
 
-    <section id="cadastrar" class="d-flex justify-content-center my-3 hidden">
+    <!-- ══ CADASTRAR PRODUTO ══ -->
+    <section class="admin-main hidden" id="cadastrar">
+        <div class="form-panel">
+            <p class="form-panel-title">
+                <i class="bi bi-plus-circle-fill me-2" style="color:var(--c-mid)"></i>
+                Cadastrar produto
+            </p>
 
-        <div class="card-cadastrar py-4">
-
-            <!-- Cabeçalho -->
-            <div class="py-4">
-                <div class="fs-1 fw-bold text-center">Cadastrar Produto</div>
-            </div>
-
-            <!-- Formulário -->
-            <form action="../actions/produto_cadastrar.php" method="POST" enctype="multipart/form-data" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+            <form PHP: action="../actions/produto_cadastrar.php" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-3">
 
                 <div>
-                    <label class="fs-4" for="foto">Imagem do produto:</label>
-                    <input type="file" name="foto" id="fotoProdutoCadastrar" required class=" form-control fw-semibold">
+                    <label class="form-label-brand" for="fotoCadastrar">Imagem do produto</label>
+                    <input type="file" id="fotoCadastrar" name="foto" accept="image/*"
+                        class="form-control-brand" style="padding:7px 12px;" required>
                 </div>
 
-                <!-- Nome -->
-                <div class="">
-                    <label class="fs-4 " for="nome">Nome do produto</label>
-                    <input type="text" id="nomeProdutoCadastrar" name="nome" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="nomeCadastrar">Nome do produto</label>
+                    <input type="text" id="nomeCadastrar" name="nome"
+                        placeholder="Ex: Filé ao molho madeira"
+                        class="form-control-brand" required>
                 </div>
 
-
-
-                <!-- Preço -->
-                <div class="">
-                    <label class="fs-4 " for="preco">Preço</label>
-                    <input type="number" name="preco" id="precoProdutoCadastrar" step="0.01" required class="form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="precoCadastrar">Preço (R$)</label>
+                    <input type="number" id="precoCadastrar" name="preco"
+                        placeholder="0,00" step="0.01" min="0"
+                        class="form-control-brand" required>
                 </div>
 
-
-                <!-- Categoria -->
-                <div class="">
-                    <label class="fs-4 " for="cargo">Categoria</label>
-                    <select id="cargoProdutoCadastrar" name="id_categoria" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="categoriaCadastrar">Categoria</label>
+                    <select id="categoriaCadastrar" name="id_categoria" class="form-control-brand" required>
 
                         <?php foreach ($listar_categoria as $c) { ?>
-
                             <option value="<?= $c['id'] ?>"><?= $c['categoria'] ?></option>
-
                         <?php } ?>
-
 
                     </select>
                 </div>
 
-                <!-- Descrição -->
-
-                <div class="">
-                    <label class="fs-4 " for="descricao">Descrição</label>
-                    <input type="text" id="descricaoProdutoCadastrar" name="descricao" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="descricaoCadastrar">Descrição</label>
+                    <textarea id="descricaoCadastrar" name="descricao"
+                        placeholder="Descreva o prato brevemente..."
+                        class="form-control-brand" rows="3"
+                        style="resize:none;"></textarea>
                 </div>
 
-
-                <!-- Botões -->
-                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
-                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Cadastrar</button>
-                    <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
+                <div class="form-actions">
+                    <button type="button" class="btn-danger-brand" onclick="voltar()">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary-brand">
+                        <i class="bi bi-check-lg"></i> Cadastrar
+                    </button>
                 </div>
 
             </form>
-
         </div>
-
     </section>
 
-    <!-- categorias -->
+    <!-- ══ CATEGORIAS ══ -->
+    <section class="hidden" id="categorias">
 
-    <section id="categorias" class="hidden">
-
-        <header class="container-fluid sticky-top color-two d-flex align-items-center justify-content-between p-4">
-
-            <!-- Título -->
-
-            <div class=" fs-1 ">
-                <a onclick="voltar()" class="ps-2 ps-md-5 text-white" href="#"><i class="bi bi-arrow-left"></i></a>
-            </div>
-
-
-            <!-- Adicionar -->
-
-            <button onclick="abrirCategoriaCadastrar()" class="me-3  fs-1 text-white p-2 d-flex justify-content-center botao-adicionar ">
-                <i class="bi bi-pen-fill"></i>
+        <header class="admin-header" id="cabecalhoCategorias">
+            <button class="btn-icon" onclick="voltar()" aria-label="Voltar">
+                <i class="bi bi-arrow-left"></i>
             </button>
-
-
+            <span class="admin-header-title">Categorias</span>
+            <button class="btn-icon" onclick="abrirCategoriaCadastrar()" aria-label="Nova categoria">
+                <i class="bi bi-plus-lg"></i>
+            </button>
         </header>
 
-        <section class="container-fluid d-flex flex-column align-items-center card-categoria-pai mt-5">
+        <div class="admin-main">
+            <p class="section-label mt-2">Categorias cadastradas</p>
 
-            <!-- categorias -->
             <?php foreach ($listar_categoria as $c) { ?>
 
-                <div class="row card-categorias my-4">
+                <div class="cat-list-card">
+                    <?= $c['categoria'] ?>
+                    <span class="cat-list-card-name">Entradas</span>
 
-
-
-                    <!-- CONTEÚDO -->
-                    <div class="col-12 col-md-9 ps-5 p-3  d-flex flex-column justify-content-center ">
-
-                        <div class="fs-4 fw-bold">
-                            <?= $c['categoria'] ?>
-                        </div>
-
-                    </div>
-
-
-
-
-
-                    <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
-
-                        <a href="../actions/categoria_remover.php?id=<?= $c['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
-                            <i class="bi bi-trash3-fill"></i>
-                        </a>
-
-                    </div>
-
-
+                    <a href="../actions/categoria_remover.php?id=<?= $c['id'] ?>" class="action-btn del" aria-label="Excluir">
+                        <i class="bi bi-trash3-fill"></i>
+                    </a>
                 </div>
 
             <?php } ?>
 
-        </section>
-
-
-
-
-
-
+        </div>
     </section>
 
-    <section id="categoriaCadastrar" class="d-flex align-items-center justify-content-center vh-100  hidden">
+    <!-- ══ CADASTRAR CATEGORIA ══ -->
+    <section class="hidden" id="categoria-cadastro" >
 
-        <div class="card-cadastrar py-4 ">
+        <header class="admin-header">
+            <button class="btn-icon" onclick="voltarCategoria()" aria-label="Voltar">
+                <i class="bi bi-arrow-left"></i>
+            </button>
+            <span class="admin-header-title">Nova categoria</span>
+            <div style="width:40px"></div>
+        </header>
 
-            <!-- Cabeçalho -->
-            <div class="py-4">
-                <div class="fs-1 fw-bold text-center">Cadastrar Categoria</div>
+        <div class="admin-main">
+
+            <div class="form-panel">
+                <p class="form-panel-title">
+                    <i class="bi bi-tag-fill me-2" style="color:var(--c-mid)"></i>
+                    Nova categoria
+                </p>
+
+                <form action="../actions/categoria_cadastrar.php" method="POST" class="d-flex flex-column gap-3">
+
+                    <div>
+                        <label class="form-label-brand" for="nomeCategoria">Nome da categoria</label>
+                        <input type="text" id="nomeCategoria" name="nome_categoria"
+                            placeholder="Ex: Grelhados"
+                            class="form-control-brand" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-danger-brand" onclick="voltarCategoria()">
+                            <i class="bi bi-x-lg"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn-primary-brand">
+                            <i class="bi bi-check-lg"></i> Cadastrar
+                        </button>
+                    </div>
+
+                </form>
             </div>
-
-            <!-- Formulário -->
-            <form action="../actions/categoria_cadastrar.php" method="POST" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
-
-                <!-- Nome -->
-                <div class="">
-                    <label class="fs-4 " for="nome">Nome da categoria</label>
-                    <input type="text" id="nomeCategoria" name="nome_categoria" required class=" form-control fw-semibold">
-                </div>
-
-
-                <!-- Botões -->
-                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
-                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Cadastrar</button>
-                    <button onclick="voltarCategoria()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
-                </div>
-
-            </form>
-
         </div>
 
+
     </section>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -341,14 +279,14 @@ print_r($produto);
         function abrirCategoriaCadastrar() {
 
             document.getElementById("categorias").classList.add("hidden");
-            document.getElementById("categoriaCadastrar").classList.remove("hidden");
+            document.getElementById("categoria-cadastro").classList.remove("hidden");
 
         }
 
         function voltarCategoria() {
 
             document.getElementById("categorias").classList.remove("hidden");
-            document.getElementById("categoriaCadastrar").classList.add("hidden");
+            document.getElementById("categoria-cadastro").classList.add("hidden");
 
         }
     </script>

@@ -18,8 +18,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/admin-index.css">
-    <link rel="stylesheet" href="../static/css/admin-admin.css">
+    <link rel="stylesheet" href="../static/css/styleadmin.css">
 
     <!-- icones -->
 
@@ -27,40 +26,32 @@
 
 </head>
 
-<body class="color-four">
+<body>
 
-    <header id="cabecalho" class="container-fluid sticky-top color-two d-flex align-items-center p-5">
-
-        <!-- Título -->
-
-        <div class=" fs-1 ">
-            <a class="ps-2 ps-md-5 text-white" href="admin.php"><i class="bi bi-arrow-left"></i></a>
-        </div>
-
+    <header class="admin-header">
+      
+        <a href="index.php" class="btn-icon" aria-label="Sair">
+            <i class="bi bi-box-arrow-left"></i>
+        </a>
+        <span class="admin-header-title">Menutti</span>
+        <div style="width:40px"></div><!-- espaçador para centralizar título -->
     </header>
 
-    <main class="d-flex justify-content-center  m-5">
+    <main class="admin-main">
 
-        <div class="main-admin container color-five py-5 d-flex justify-content-center align-items-center">
+        <p class="section-label mt-4">Selecione a área</p>
 
-            <div class="row ">
+        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
 
-                <!-- CARD -->
-                <div class="col-12 col-md-6 mb-2 d-flex justify-content-center ">
-                    <a href="funcionarios.php" class="user-card color-one">
-                        <img src="../img/person-fill.svg" class="user-img">
-                        <span class="fs-3 fw-semibold">Funcionarios</span>
-                    </a>
-                </div>
+            <a href="funcionarios.php" class="user-card">
+                <i class="bi bi-people-fill user-card-icon"></i>
+                <span class="user-card-label">Funcionários</span>
+            </a>
 
-                <div class="col-12 col-md-6 mb-2 d-flex justify-content-center">
-                    <a href="produtos.php" type="button" onclick="abrirLogin('Chefe')" class="user-card">
-                        <img src="../img/fork-knife.svg" class="user-img">
-                        <span class="fs-3 fw-semibold">Produtos</span>
-                    </a>
-                </div>
-
-            </div>
+            <a href="produtos.php" class="user-card">
+                <i class="bi bi-fork-knife user-card-icon"></i>
+                <span class="user-card-label">Produtos</span>
+            </a>
 
         </div>
 

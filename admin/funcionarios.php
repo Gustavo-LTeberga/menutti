@@ -36,8 +36,7 @@ $listar_cargo = $cargo->listar();
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/admin-index.css">
-    <link rel="stylesheet" href="../static/css/admin-funcionarios.css">
+    <link rel="stylesheet" href="../static/css/stylefuncionarios.css">
 
     <!-- icones -->
 
@@ -45,204 +44,177 @@ $listar_cargo = $cargo->listar();
 
 </head>
 
-<body class="container-fluid p-0 color-three inter-uniquifier">
-
-    <!-- Mobile First -->
-
-
-
-    <!-- Voltar -->
-
-    <header id="cabecalho" class="container-fluid sticky-top color-two d-flex align-items-center justify-content-between p-4">
-
-        <!-- Título -->
-
-        <div class=" fs-1 ">
-            <a class="ps-2 ps-md-5 text-white" href="admin.php"><i class="bi bi-arrow-left"></i></a>
-        </div>
-
-
-        <!-- Adicionar -->
-
-        <button onclick="abrirCadastrar()" class="me-3  fs-1 text-white p-2 d-flex justify-content-center botao-adicionar ">
+<body>
+    <!-- ══ HEADER ══ -->
+    <!-- PHP: id="cabecalho" mantido para compatibilidade com JS existente -->
+    <header class="admin-header" id="cabecalho">
+        <a href="admin.php" class="btn-icon" aria-label="Voltar">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <span class="admin-header-title">Funcionários</span>
+        <!-- PHP: onclick="abrirCadastrar()" -->
+        <button class="btn-icon" onclick="abrirCadastrar()" aria-label="Adicionar funcionário">
             <i class="bi bi-plus-lg"></i>
         </button>
-
-
     </header>
 
+    <!-- ══ LISTAGEM ══ -->
+    <main class="admin-main" id="listagem">
 
-
-    <section id="listagem" class="container-fluid d-flex flex-column align-items-center justify-content-center ">
+        <p class="section-label mt-2">Equipe cadastrada</p>
 
         <?php foreach ($listar_funcionario as $f) { ?>
-            <div class="row card-funcionarios my-4">
 
-                <!-- IMAGEM -->
-                <div class="col-12 col-md-4 p-2 text-center my-auto">
-                    <img class="img-fluid rounded w-50 h-50" src="../img/person-fill.svg" alt="imagem">
+            <!-- Card funcionário  -->
+            <div class="list-card">
+                <div class="list-card-img d-flex align-items-center justify-content-center"
+                    style="background: var(--c-blue-lt);">
+                    <i class="bi bi-person-fill" style="font-size:2rem; color:var(--c-mid);"></i>
                 </div>
-
-                <!-- CONTEÚDO -->
-                <div class="col-12 col-md-5 p-3 d-flex flex-column justify-content-center ">
-
-                    <div class="fs-4 fw-bold">
-                        Nome Completo
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $f['nome_completo'] ?>
-                    </div>
-                    <div class="fs-4 fw-bold">
-                        Email
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $f['email'] ?>
-                    </div>
-                    <div class="fs-4 fw-bold">
-                        Cargo
-                    </div>
-                    <div class="fs-6 fw-semibold">
-                        <?= $f['id_cargo'] ?>
-                    </div>
-
+                <div class="list-card-body">
+                    <p class="list-card-title"><?= $f['nome_completo'] ?></p>
+                    <p class="list-card-meta"><?= $f['email'] ?></p>
+                    <!--— idealmente buscar nome do cargo arrumar depois -->
+                    <span class="cargo-badge mt-1"><?= $f['id_cargo'] ?></span>
                 </div>
-
-                <div class="col-12 col-md-3 p-3 d-flex d-flex flex-column justify-content-center align-items-center gap-2">
-
-                    <button onclick="abrirEditar()" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits color-two">
+                <div class="list-card-actions">
+                    <!-- <?= $f['id'] ?> fazer depois -->
+                    <button class="action-btn edit" onclick="abrirEditar()" aria-label="Editar">
                         <i class="bi bi-pen-fill"></i>
                     </button>
-                    <a href="../actions/funcionario_excluir.php?id=<?= $f['id'] ?>" class=" fs-1 text-white p-2 d-flex justify-content-center botao-edits bg-danger">
+                    <a href="../actions/funcionario_excluir.php?id=<?= $f['id'] ?>" class="action-btn del" aria-label="Excluir">
                         <i class="bi bi-trash3-fill"></i>
                     </a>
-
                 </div>
-
-            </div>
-        <?php } ?>
-
-    </section>
-
-    <section id="cadastrar" class="d-flex justify-content-center my-3 hidden">
-
-        <div class="card-cadastrar py-4">
-
-            <!-- Cabeçalho -->
-            <div class="py-4">
-                <div class="fs-1 fw-bold text-center">Cadastrar Funcionário</div>
             </div>
 
-            <!-- Formulário -->
-            <form method="POST" action="../actions/funcionario_cadastrar.php" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+            <!-- PHP: <?php } ?> -->
 
-                <!-- Nome -->
-                <div class="">
-                    <label class="fs-4 " for="nomeCadastrar">Nome completo</label>
-                    <input type="text" id="nomeCadastrar" name="nome_completo" required class=" form-control fw-semibold">
+    </main>
+
+    <!-- ══ CADASTRAR ══ -->
+    <section class="admin-main hidden" id="cadastrar">
+
+        <div class="form-panel">
+            <p class="form-panel-title">
+                <i class="bi bi-person-plus-fill me-2" style="color:var(--c-mid)"></i>
+                Cadastrar funcionário
+            </p>
+
+            <form action="../actions/funcionario_cadastrar.php" method="POST" class="d-flex flex-column gap-3">
+
+                <div>
+                    <label class="form-label-brand" for="nomeCadastrar">Nome completo</label>
+                    <input type="text" id="nomeCadastrar" name="nome_completo"
+                        placeholder="Nome do funcionário"
+                        class="form-control-brand" required>
                 </div>
 
-
-
-                <!-- Email -->
-                <div class="">
-                    <label class="fs-4 " for="emailCadastrar">Email</label>
-                    <input type="email" id="emailCadastrar" name="email" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="emailCadastrar">Email</label>
+                    <input type="email" id="emailCadastrar" name="email"
+                        placeholder="email@exemplo.com"
+                        class="form-control-brand" required>
                 </div>
 
-
-
-                <!-- Senha -->
-                <div class="">
-                    <label class="fs-4 " for="senhaCadastrar">Senha</label>
-                    <input type="password" id="senhaCadastrar" name="senha" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="senhaCadastrar">Senha</label>
+                    <input type="password" id="senhaCadastrar" name="senha"
+                        placeholder="••••••••"
+                        class="form-control-brand" required>
                 </div>
 
+                <div>
+                    <label class="form-label-brand" for="cargoCadastrar">Cargo</label>
+                    <select id="cargoCadastrar" name="id_cargo" class="form-control-brand" required>
+                        <?php foreach ($listar_cargo as $c) { ?>
 
-                <!-- Cargo -->
-                <div class="">
-                    <label class="fs-4 " for="cargoCadastrar">Cargo</label>
-                    <select id="cargoCadastrar" name="id_cargo" required class=" form-control fw-semibold">
+                            <option value="<?= $c['id'] ?>"><?= $c['nome_cargo'] ?></option>
 
-                    <?php foreach ($listar_cargo as $c) { ?>
-
-                        <option value="<?= $c['id'] ?>"><?= $c['nome_cargo'] ?></option>
-
-                    <?php } ?>
-
+                        <?php } ?>
 
                     </select>
                 </div>
 
-
-                <!-- Botões -->
-                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
-                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Cadastrar</button>
-                    <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
+                <div class="form-actions">
+                    <button type="button" class="btn-danger-brand" onclick="voltar()">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary-brand">
+                        <i class="bi bi-check-lg"></i> Cadastrar
+                    </button>
                 </div>
 
             </form>
-
         </div>
 
     </section>
 
-    <section id="editar" class="d-flex justify-content-center my-3 hidden">
+    <!-- ══ EDITAR ══ FAZER DEPOIS -->
+    <section class="admin-main hidden" id="editar">
 
-        <div class="card-cadastrar py-4">
+        <div class="form-panel">
+            <p class="form-panel-title">
+                <i class="bi bi-pen-fill me-2" style="color:var(--c-mid)"></i>
+                Editar funcionário
+            </p>
 
-            <!-- Cabeçalho -->
-            <div class="py-4">
-                <div class="fs-1 fw-bold text-center">Editar Funcionário</div>
-            </div>
+            <!-- PHP: action="../actions/funcionario_editar.php" method="POST" -->
+            <form class="d-flex flex-column gap-3">
 
-            <!-- Formulário -->
-            <form method="POST" action="" class=" d-flex flex-column justify-content-center pb-5 px-5 gap-3 fw-semibold">
+                <!-- PHP: <input type="hidden" name="id" value="<?= $f['id'] ?>"> -->
 
-                <!-- Nome -->
-                <div class="">
-                    <label class="fs-4 " for="nomeEditar">Nome completo</label>
-                    <input type="text" id="nomeEditar" name="nome_completo" value="nome" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="nomeEditar">Nome completo</label>
+                    <!-- PHP: value="<?= $f['nome_completo'] ?>" -->
+                    <input type="text" id="nomeEditar" name="nome_completo"
+                        value="Nome"
+                        class="form-control-brand" required>
                 </div>
 
-
-
-                <!-- Email -->
-                <div class="">
-                    <label class="fs-4 " for="emailEditar">Email</label>
-                    <input type="email" id="emailEditar" name="email" value="admin@gmail.com" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="emailEditar">Email</label>
+                    <!-- PHP: value="<?= $f['email'] ?>" -->
+                    <input type="email" id="emailEditar" name="email"
+                        value="@menutti.com.br"
+                        class="form-control-brand" required>
                 </div>
 
-
-
-                <!-- Senha -->
-                <div class="">
-                    <label class="fs-4 " for="senhaEditar">Senha</label>
-                    <input type="password" id="senhaEditar" name="senha" required class=" form-control fw-semibold">
+                <div>
+                    <label class="form-label-brand" for="senhaEditar">Nova senha</label>
+                    <input type="password" id="senhaEditar" name="senha"
+                        placeholder="Deixe em branco para manter"
+                        class="form-control-brand">
                 </div>
 
-
-                <!-- Cargo -->
-                <div class="">
-                    <label class="fs-4 " for="cargoEditar">Cargo</label>
-                    <select id="cargoEditar" name="id_cargo" required class=" form-control fw-semibold">
-
+                <div>
+                    <label class="form-label-brand" for="cargoEditar">Cargo</label>
+                    <select id="cargoEditar" name="id_cargo" class="form-control-brand" required>
+                        <!--
+            PHP: <?php foreach ($listar_cargo as $c) { ?>
+            <option value="<?= $c['id'] ?>"
+              <?= ($c['id'] == $f['id_cargo']) ? 'selected' : '' ?>>
+              <?= $c['nome_cargo'] ?>
+            </option>
+            <?php } ?>
+          -->
                         <option value="1">Admin</option>
                         <option value="2">Chefe</option>
                         <option value="3">Caixa</option>
-                        <option value="4">Gaçom</option>
-
+                        <option value="4" selected>Garçom</option>
                     </select>
                 </div>
 
-
-                <!-- Botões -->
-                <div class="pt-3 d-flex flex-column flex-sm-row-reverse align-items-center justify-content-center gap-4">
-                    <button class="botao-edits p-2 color-one fw-bold" type="submit">Salvar Alteração</button>
-                    <button onclick="voltar()" class="botao-edits p-2 bg-danger fw-bold" type="reset">Cancelar</button>
+                <div class="form-actions">
+                    <button type="button" class="btn-danger-brand" onclick="voltar()">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary-brand">
+                        <i class="bi bi-check-lg"></i> Salvar alterações
+                    </button>
                 </div>
 
             </form>
-
         </div>
 
     </section>
@@ -254,19 +226,15 @@ $listar_cargo = $cargo->listar();
 
     <script>
         function abrirCadastrar() {
-
             document.getElementById("cabecalho").classList.add("hidden");
             document.getElementById("listagem").classList.add("hidden");
             document.getElementById("cadastrar").classList.remove("hidden");
-
         }
 
         function abrirEditar() {
-
             document.getElementById("cabecalho").classList.add("hidden");
             document.getElementById("listagem").classList.add("hidden");
             document.getElementById("editar").classList.remove("hidden");
-
         }
 
         function voltar() {

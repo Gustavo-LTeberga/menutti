@@ -29,7 +29,7 @@
                 "tipo" => "sucesso",
                 "mensagem" => "Funcionário cadastrado com sucesso!"
             ];
-            header('Location: ../admin/admin.php');
+            header('Location: ../admin/funcionarios.php');
             exit();
         }else{
             // Criar uma sessão temporária para mostrar a mensagem de erro:

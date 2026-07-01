@@ -18,7 +18,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/admin-index.css">
+    <link rel="stylesheet" href="../static/css/styleadmin.css">
 
     <!-- icones -->
 
@@ -26,37 +26,37 @@
 
 </head>
 
-<body class="color-four">
+<body>
 
-    <main>
+    <div class="login-wrap">
+        <div class="login-card">
 
-        <!-- Login -->
+            <p class="login-logo">Menutti</p>
+            <p class="login-subtitle">Painel administrativo</p>
 
-        <section id="tela-login" class="d-flex justify-content-center align-items-center vh-100">
+            <form action="../actions/funcionario_logar.php" method="POST" class="d-flex flex-column gap-3">
 
-            <div class="container login-card mx-auto color-five">
-                <form action="../actions/funcionario_logar.php" method="POST" class="h-100  row">
-                    <!-- topo do card -->
-                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
+                <div>
+                    <label class="form-label-brand" for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com"
+                        class="form-control-brand" required>
+                </div>
 
-                        <div class="pb-md-4 h-75 d-flex flex-column justify-content-center align-items-center">
-                            <span id="cargo-nome" class="fw-bold fs-2">Admin</span>
-                            <img src="../img/person-fill.svg" class="img-fluid login-img" alt="login">
-                        </div>
-                    </div>
+                <div>
+                    <label class="form-label-brand" for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="••••••••"
+                        class="form-control-brand" required>
+                </div>
 
-                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center gap-4 my-md-3">
-                        <!-- conteúdo -->
-                        <input type="text" name="email" class="w-75 form-control" placeholder="Email" required>
-                        <input type="password" name="senha" class="w-75 form-control" placeholder="Senha" required>
-                        <button class="login-botao mb-3 mb-md-0">Entrar</button>
-                    </div>
-                </form>
-            </div>
+                <button type="submit" class="btn-primary-brand w-100 justify-content-center mt-2"
+                    style="padding: 12px;">
+                    Entrar
+                </button>
 
-        </section>
+            </form>
 
-    </main>
+        </div>
+    </div>
 
 
 
